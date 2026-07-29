@@ -1,10 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useSuspenseQuery, queryOptions } from "@tanstack/react-query";
+import { useSuspenseQuery, useQuery, queryOptions } from "@tanstack/react-query";
+import { useServerFn } from "@tanstack/react-start";
+import { getProductReviews } from "@/lib/reviews.functions";
 import { useMemo, useState } from "react";
 import { Heart, Truck, Shield, Repeat } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ProductGrid } from "@/components/site/ProductGrid";
+import { ProductReviews, Stars } from "@/components/site/ProductReviews";
 import { getProduct } from "@/lib/catalog.functions";
 import { discountPercent, effectivePrice } from "@/lib/format";
 import { PriceTag, SaleBadge } from "@/components/site/Price";
@@ -51,6 +54,16 @@ function ProductPage() {
   const [fastening, setFastening] = useState<string | null>(null);
 
   const product = data?.product;
+  const fetchReviews = useServerFn(getProductReviews);
+  const reviewsQuery = useQuery({
+    queryKey: ["reviews", product?.id],
+    enabled: !!product?.id,
+    queryFn: () => fetchReviews({ data: { productId: product!.id } }),
+  });
+  const ratingSummary = {
+    average: reviewsQuery.data?.average ?? 0,
+    count: reviewsQuery.data?.count ?? 0,
+  };
   const variants = useMemo(() => product?.product_variants ?? [], [product]);
   const colors = useMemo(
     () => Array.from(new Set(variants.map((v) => v.color))),
@@ -151,6 +164,15 @@ function ProductPage() {
           <div>
             <p className="eyebrow">{product.category}</p>
             <h1 className="mt-3 text-[clamp(2rem,4.5vw,3.25rem)]">{product.name}</h1>
+            <a
+              href="#reviews"
+              className="mt-4 inline-flex items-center gap-2 text-xs text-muted-foreground transition-colors hover:text-foreground"
+            >
+              <Stars value={ratingSummary.average} />
+              {ratingSummary.count > 0
+                ? `${ratingSummary.average.toFixed(1)} · ${ratingSummary.count} review${ratingSummary.count === 1 ? "" : "s"}`
+                : "Write a review"}
+            </a>
           </div>
 
           <PriceTag
@@ -280,6 +302,8 @@ function ProductPage() {
           </Tabs>
         </div>
       </section>
+
+      <ProductReviews productId={product.id} productName={product.name} />
 
       {(data?.related.length ?? 0) > 0 && (
         <section className="shell pt-28">
