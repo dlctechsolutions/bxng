@@ -22,6 +22,8 @@ function AccountOverview() {
   const { user } = useAuth();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const checkAdmin = useServerFn(amIAdmin);
+  const admin = useQuery({ queryKey: ["admin", "me"], queryFn: () => checkAdmin({}) });
 
   async function signOut() {
     await queryClient.cancelQueries();
