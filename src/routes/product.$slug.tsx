@@ -1,5 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useSuspenseQuery, queryOptions } from "@tanstack/react-query";
+import { useSuspenseQuery, useQuery, queryOptions } from "@tanstack/react-query";
+import { useServerFn } from "@tanstack/react-start";
+import { getProductReviews } from "@/lib/reviews.functions";
 import { useMemo, useState } from "react";
 import { Heart, Truck, Shield, Repeat } from "lucide-react";
 import { Button } from "@/components/ui/button";
