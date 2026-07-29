@@ -49,7 +49,7 @@ export function CartDrawer() {
                       <button
                         type="button"
                         aria-label="Decrease quantity"
-                        className="grid size-7 place-items-center hover:bg-secondary"
+                        className="grid size-7 place-items-center transition-colors hover:bg-secondary focus-flash"
                         onClick={() => cart.setQuantity(item.key, item.quantity - 1)}
                       >
                         <Minus className="size-3" />
@@ -58,7 +58,7 @@ export function CartDrawer() {
                       <button
                         type="button"
                         aria-label="Increase quantity"
-                        className="grid size-7 place-items-center hover:bg-secondary"
+                        className="grid size-7 place-items-center transition-colors hover:bg-secondary focus-flash"
                         onClick={() => cart.setQuantity(item.key, item.quantity + 1)}
                       >
                         <Plus className="size-3" />
@@ -69,7 +69,7 @@ export function CartDrawer() {
                     type="button"
                     aria-label={`Remove ${item.name}`}
                     onClick={() => cart.remove(item.key)}
-                    className="self-start text-muted-foreground transition-colors hover:text-foreground"
+                    className="self-start text-muted-foreground transition-colors hover:text-accent focus-flash"
                   >
                     <X className="size-4" />
                   </button>

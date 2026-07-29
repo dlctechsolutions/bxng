@@ -42,7 +42,7 @@ export function Header() {
               <button
                 type="button"
                 aria-label="Open menu"
-                className="grid size-9 shrink-0 place-items-center lg:hidden"
+                className="icon-action grid size-9 shrink-0 place-items-center lg:hidden"
               >
                 <Menu className="size-5" />
               </button>
@@ -107,14 +107,16 @@ export function Header() {
         <nav className="hidden items-center justify-center gap-9 lg:flex">
           <Link
             to="/the-44-story"
-            className="link-underline text-[0.7rem] font-bold uppercase tracking-[0.22em]"
+            className="nav-link text-[0.7rem] font-bold uppercase tracking-[0.22em]"
           >
             The 44 Story
           </Link>
           <DropdownMenu>
-            <DropdownMenuTrigger className="flex items-center gap-1.5 text-[0.7rem] font-bold uppercase tracking-[0.22em] outline-none">
-              Boxing Gloves <ChevronDown className="size-3.5" />
+            <DropdownMenuTrigger className="nav-link flex items-center gap-1.5 text-[0.7rem] font-bold uppercase tracking-[0.22em] outline-none data-[state=open]:text-accent [&[data-state=open]_svg]:rotate-180">
+              Boxing Gloves{" "}
+              <ChevronDown className="size-3.5 transition-transform duration-300" />
             </DropdownMenuTrigger>
+
             <DropdownMenuContent align="center" className="border-border bg-popover">
               {collections.map((c) => (
                 <DropdownMenuItem key={c.slug} asChild>
@@ -131,7 +133,7 @@ export function Header() {
           <DropdownMenu>
             <DropdownMenuTrigger
               aria-label="My account"
-              className="hidden size-9 place-items-center outline-none sm:grid"
+              className="icon-action hidden size-9 place-items-center outline-none data-[state=open]:text-accent sm:grid"
             >
               <User className="size-[1.15rem]" />
             </DropdownMenuTrigger>
@@ -166,7 +168,7 @@ export function Header() {
             </DropdownMenuContent>
           </DropdownMenu>
 
-          <Link to="/wishlist" aria-label="Wishlist" className="hidden size-9 place-items-center sm:grid">
+          <Link to="/wishlist" aria-label="Wishlist" className="icon-action hidden size-9 place-items-center sm:grid">
             <Heart className="size-[1.15rem]" />
           </Link>
 
