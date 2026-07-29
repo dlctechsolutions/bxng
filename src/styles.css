@@ -10,8 +10,8 @@
  */
 
 @theme inline {
-  --font-display: "Archivo", "Arial Black", sans-serif;
-  --font-sans: "Karla", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "presicav", "Arial Black", sans-serif;
+  --font-sans: "presicav", ui-sans-serif, system-ui, sans-serif;
 
   --radius-sm: 0px;
   --radius-md: 0px;
