@@ -1,34 +1,47 @@
 import { createServerFn } from "@tanstack/react-start";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 
-async function assertAdmin(context: { supabase: any; userId: string }) {
-  const { data, error } = await context.supabase.rpc("has_role", {
-    _user_id: context.userId,
-    _role: "admin",
-  });
+async function isAdminUser(context: { supabase: any; userId: string }) {
+  const { data, error } = await context.supabase
+    .from("user_roles")
+    .select("role")
+    .eq("user_id", context.userId)
+    .eq("role", "admin")
+    .maybeSingle();
   if (error) throw error;
-  if (!data) throw new Error("Forbidden");
+  return Boolean(data);
+}
+
+async function assertAdmin(context: { supabase: any; userId: string }) {
+  if (!(await isAdminUser(context))) throw new Error("Forbidden");
 }
 
 export const amIAdmin = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {
-    const { data, error } = await context.supabase.rpc("has_role", {
-      _user_id: context.userId,
-      _role: "admin",
-    });
-    if (error) throw error;
-    return { isAdmin: Boolean(data) };
+    return { isAdmin: await isAdminUser(context) };
   });
 
-/** Only succeeds while no admin exists yet (enforced in the database). */
+/** Only succeeds while no admin exists yet. */
 export const claimAdmin = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {
-    const { data, error } = await context.supabase.rpc("claim_admin");
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { data: existing, error: existingError } = await supabaseAdmin
+      .from("user_roles")
+      .select("user_id")
+      .eq("role", "admin")
+      .limit(1);
+    if (existingError) throw existingError;
+    if (existing && existing.length > 0) return { claimed: false };
+
+    const { error } = await supabaseAdmin
+      .from("user_roles")
+      .insert({ user_id: context.userId, role: "admin" });
     if (error) throw error;
-    return { claimed: Boolean(data) };
+    return { claimed: true };
   });
+
 
 export const getAdminOverview = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
