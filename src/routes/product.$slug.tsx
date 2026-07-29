@@ -52,6 +52,16 @@ function ProductPage() {
   const [fastening, setFastening] = useState<string | null>(null);
 
   const product = data?.product;
+  const fetchReviews = useServerFn(getProductReviews);
+  const reviewsQuery = useQuery({
+    queryKey: ["reviews", product?.id],
+    enabled: !!product?.id,
+    queryFn: () => fetchReviews({ data: { productId: product!.id } }),
+  });
+  const ratingSummary = {
+    average: reviewsQuery.data?.average ?? 0,
+    count: reviewsQuery.data?.count ?? 0,
+  };
   const variants = useMemo(() => product?.product_variants ?? [], [product]);
   const colors = useMemo(
     () => Array.from(new Set(variants.map((v) => v.color))),
