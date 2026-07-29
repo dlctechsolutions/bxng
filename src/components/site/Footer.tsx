@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { Instagram, Facebook, Linkedin, Music2 } from "lucide-react";
 import { Logo } from "./Logo";
+import { NewsletterSignup } from "./NewsletterSignup";
 
 const links = [
   { to: "/the-44-story", label: "The 44 Story" },
@@ -22,7 +23,7 @@ const socials = [
 export function Footer() {
   return (
     <footer className="mt-28 border-t border-border bg-surface">
-      <div className="shell grid gap-12 py-16 md:grid-cols-3 md:py-20">
+      <div className="shell grid gap-12 py-16 md:grid-cols-2 md:py-20 lg:grid-cols-4">
         <div className="max-w-xs">
           <Logo />
           <p className="mt-5 text-sm leading-relaxed text-muted-foreground">
@@ -77,6 +78,8 @@ export function Footer() {
             <p>Mon–Fri, 09:00–17:00 GMT</p>
           </div>
         </div>
+
+        <NewsletterSignup />
       </div>
 
       <div className="border-t border-border">
