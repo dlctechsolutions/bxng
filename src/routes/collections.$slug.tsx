@@ -100,32 +100,81 @@ function CollectionPage() {
       </section>
 
       <section className="shell pt-12">
-        <div className="flex flex-wrap items-center gap-2 border-b border-border pb-6">
-          <span className="eyebrow mr-3">Filter</span>
-          {categories.map((c) => (
-            <button
-              key={c}
-              type="button"
-              onClick={() => setCategory(c)}
-              aria-pressed={category === c}
-              className={
-                "border px-4 py-2 text-[0.65rem] font-bold uppercase tracking-[0.18em] transition-colors " +
-                (category === c
-                  ? "border-foreground bg-foreground text-background"
-                  : "border-border text-muted-foreground hover:border-foreground hover:text-foreground")
-              }
-            >
-              {c}
-            </button>
-          ))}
+        <div className="flex flex-col gap-6 border-b border-border pb-6 lg:flex-row lg:items-center lg:justify-between">
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="eyebrow mr-3">Filter</span>
+            {categories.map((c) => (
+              <button
+                key={c}
+                type="button"
+                onClick={() => setCategory(c)}
+                aria-pressed={category === c}
+                className={
+                  "border px-4 py-2 text-[0.65rem] font-bold uppercase tracking-[0.18em] transition-colors focus-flash " +
+                  (category === c
+                    ? "border-foreground bg-foreground text-background"
+                    : "border-border text-muted-foreground hover:border-foreground hover:text-foreground")
+                }
+              >
+                {c}
+              </button>
+            ))}
+          </div>
+
+          <div className="relative w-full lg:max-w-xs">
+            <Search
+              aria-hidden
+              className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground"
+            />
+            <label htmlFor="collection-search" className="sr-only">
+              Search {collection.name}
+            </label>
+            <input
+              id="collection-search"
+              type="search"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search products"
+              className="focus-flash w-full border border-border bg-card py-2.5 pl-10 pr-10 text-xs uppercase tracking-[0.16em] text-foreground placeholder:text-muted-foreground hover:border-foreground/40"
+            />
+            {query && (
+              <button
+                type="button"
+                onClick={() => setQuery("")}
+                aria-label="Clear search"
+                className="icon-action absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground"
+              >
+                <X className="size-4" />
+              </button>
+            )}
+          </div>
         </div>
 
         <p className="mt-6 text-xs text-muted-foreground">
           {products.length} product{products.length === 1 ? "" : "s"}
+          {q ? ` matching "${query.trim()}"` : ""}
         </p>
 
         <div className="mt-8">
-          <ProductGrid products={products} columns={4} />
+          {products.length === 0 ? (
+            <div className="border border-border bg-card px-6 py-20 text-center">
+              <p className="text-sm text-muted-foreground">
+                No products match your search.
+              </p>
+              <Button
+                variant="outline"
+                className="mt-6"
+                onClick={() => {
+                  setQuery("");
+                  setCategory("All");
+                }}
+              >
+                Clear filters
+              </Button>
+            </div>
+          ) : (
+            <ProductGrid products={products} columns={4} />
+          )}
         </div>
       </section>
     </>
