@@ -44,6 +44,8 @@ export function ProductCard({
           />
         </Link>
 
+        <div className="pointer-events-none absolute inset-0 vignette-soft opacity-70 transition-opacity duration-700 group-hover:opacity-40" />
+
         <div className="pointer-events-none absolute inset-x-0 top-0 flex items-start justify-between p-3">
           <div className="flex flex-col gap-1">
             {off !== null && (
