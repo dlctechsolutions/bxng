@@ -42,7 +42,7 @@ export function Header() {
               <button
                 type="button"
                 aria-label="Open menu"
-                className="grid size-9 shrink-0 place-items-center lg:hidden"
+                className="icon-action grid size-9 shrink-0 place-items-center lg:hidden"
               >
                 <Menu className="size-5" />
               </button>
@@ -133,7 +133,7 @@ export function Header() {
           <DropdownMenu>
             <DropdownMenuTrigger
               aria-label="My account"
-              className="hidden size-9 place-items-center outline-none sm:grid"
+              className="icon-action hidden size-9 place-items-center outline-none data-[state=open]:text-accent sm:grid"
             >
               <User className="size-[1.15rem]" />
             </DropdownMenuTrigger>
@@ -168,7 +168,7 @@ export function Header() {
             </DropdownMenuContent>
           </DropdownMenu>
 
-          <Link to="/wishlist" aria-label="Wishlist" className="hidden size-9 place-items-center sm:grid">
+          <Link to="/wishlist" aria-label="Wishlist" className="icon-action hidden size-9 place-items-center sm:grid">
             <Heart className="size-[1.15rem]" />
           </Link>
 
