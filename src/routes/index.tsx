@@ -4,6 +4,7 @@ import { ArrowRight, Check } from "@/components/site/icons";
 import { Button } from "@/components/ui/button";
 import { ProductGrid } from "@/components/site/ProductGrid";
 import { getStorefront } from "@/lib/catalog.functions";
+import { cn } from "@/lib/utils";
 
 const storefrontQuery = queryOptions({
   queryKey: ["storefront"],
@@ -52,7 +53,9 @@ function Home() {
           height={1088}
           className="absolute inset-0 size-full object-cover object-center"
         />
-        <div className="absolute inset-0 scrim-left" />
+        <div className="pointer-events-none absolute inset-0 editorial-overlay" />
+        <div className="pointer-events-none absolute inset-0 scrim-left" />
+        <div className="pointer-events-none absolute inset-0 vignette" />
         <div className="shell relative flex min-h-[78vh] flex-col justify-end pb-16 md:min-h-[86vh] md:pb-24">
           <p className="eyebrow">Founding Collection</p>
           <h1 className="mt-5 max-w-4xl text-[clamp(2.75rem,8vw,6.5rem)]">
@@ -114,14 +117,17 @@ function Home() {
       {/* Brand story */}
       <section className="mt-28 border-y border-border bg-surface">
         <div className="grid lg:grid-cols-2">
-          <img
-            src="/images/story.jpg"
-            alt="Boxer training alone in a dark warehouse gym"
-            loading="lazy"
-            width={1400}
-            height={1200}
-            className="h-full max-h-[46rem] w-full object-cover"
-          />
+          <div className="relative isolate overflow-hidden">
+            <img
+              src="/images/story.jpg"
+              alt="Boxer training alone in a dark warehouse gym"
+              loading="lazy"
+              width={1400}
+              height={1200}
+              className="h-full max-h-[46rem] w-full object-cover"
+            />
+            <div className="pointer-events-none absolute inset-0 vignette-soft" />
+          </div>
           <div className="flex flex-col justify-center gap-8 px-6 py-16 md:px-14 md:py-24">
             <div>
               <p className="eyebrow">The 44 Story</p>
@@ -217,7 +223,14 @@ function RangeBanner({
         height={900}
         className="h-[26rem] w-full object-cover md:h-[34rem]"
       />
-      <div className="absolute inset-0 bg-background/55" />
+      <div className="pointer-events-none absolute inset-0 bg-background/35" />
+      <div
+        className={cn(
+          "pointer-events-none absolute inset-0",
+          align === "right" ? "scrim-right" : "scrim-left",
+        )}
+      />
+      <div className="pointer-events-none absolute inset-0 vignette" />
       <div className="shell absolute inset-0 flex items-center">
         <div
           className={
