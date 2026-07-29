@@ -219,7 +219,14 @@ function RangeBanner({
         height={900}
         className="h-[26rem] w-full object-cover md:h-[34rem]"
       />
-      <div className="absolute inset-0 bg-background/55" />
+      <div className="pointer-events-none absolute inset-0 bg-background/35" />
+      <div
+        className={cn(
+          "pointer-events-none absolute inset-0",
+          align === "right" ? "scrim-right" : "scrim-left",
+        )}
+      />
+      <div className="pointer-events-none absolute inset-0 vignette" />
       <div className="shell absolute inset-0 flex items-center">
         <div
           className={
