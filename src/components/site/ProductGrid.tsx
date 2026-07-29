@@ -18,7 +18,7 @@ export function ProductGrid({ products, columns = 3 }: { products: Product[]; co
           <ProductCard key={p.id} product={p} onQuickView={setQuick} />
         ))}
       </div>
-      <QuickView product={quick} onOpenChange={(open) => !open && setQuick(null)} />
+      <QuickView product={quick} onOpenChange={(open: boolean) => !open && setQuick(null)} />
     </>
   );
 }
