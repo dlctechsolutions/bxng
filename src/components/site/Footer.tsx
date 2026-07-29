@@ -22,7 +22,7 @@ const socials = [
 export function Footer() {
   return (
     <footer className="mt-28 border-t border-border bg-surface">
-      <div className="shell grid gap-12 py-16 md:grid-cols-3 md:py-20">
+      <div className="shell grid gap-12 py-16 md:grid-cols-2 md:py-20 lg:grid-cols-4">
         <div className="max-w-xs">
           <Logo />
           <p className="mt-5 text-sm leading-relaxed text-muted-foreground">
