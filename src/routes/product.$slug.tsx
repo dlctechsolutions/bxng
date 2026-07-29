@@ -7,6 +7,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ProductGrid } from "@/components/site/ProductGrid";
 import { getProduct } from "@/lib/catalog.functions";
 import { money, num, discountPercent, effectivePrice } from "@/lib/format";
+import { PriceTag } from "@/components/site/Price";
 import { useCart } from "@/lib/cart";
 import { useWishlist } from "@/lib/use-wishlist";
 import { cn } from "@/lib/utils";
@@ -156,14 +157,12 @@ function ProductPage() {
             <h1 className="mt-3 text-[clamp(2rem,4.5vw,3.25rem)]">{product.name}</h1>
           </div>
 
-          <p className="flex items-baseline gap-3">
-            {product.sale_price && (
-              <span className="text-lg text-muted-foreground line-through">
-                {money(num(product.price))}
-              </span>
-            )}
-            <span className="text-2xl font-semibold">{money(price)}</span>
-          </p>
+          <PriceTag
+            price={product.price}
+            salePrice={product.sale_price}
+            size="lg"
+            showBadge
+          />
 
           <p className="max-w-prose text-sm leading-relaxed text-muted-foreground">
             {product.description}
