@@ -152,6 +152,15 @@ function ProductPage() {
           <div>
             <p className="eyebrow">{product.category}</p>
             <h1 className="mt-3 text-[clamp(2rem,4.5vw,3.25rem)]">{product.name}</h1>
+            <a
+              href="#reviews"
+              className="mt-4 inline-flex items-center gap-2 text-xs text-muted-foreground transition-colors hover:text-foreground"
+            >
+              <Stars value={ratingSummary.average} />
+              {ratingSummary.count > 0
+                ? `${ratingSummary.average.toFixed(1)} · ${ratingSummary.count} review${ratingSummary.count === 1 ? "" : "s"}`
+                : "Write a review"}
+            </a>
           </div>
 
           <PriceTag
