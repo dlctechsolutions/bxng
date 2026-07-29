@@ -26,7 +26,7 @@ function StoryPage() {
       <section className="relative isolate overflow-hidden">
         <img
           src="/images/story.jpg"
-          alt="Boxer training alone in a dark warehouse gym"
+          alt="44 Boxing athlete shadow boxing in the ring"
           width={1400}
           height={1200}
           className="h-[26rem] w-full object-cover object-center md:h-[34rem]"

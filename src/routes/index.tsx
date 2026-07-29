@@ -119,8 +119,8 @@ function Home() {
         <div className="grid lg:grid-cols-2">
           <div className="relative isolate overflow-hidden">
             <img
-              src="/images/story.jpg"
-              alt="Boxer training alone in a dark warehouse gym"
+              src="/images/story-alt.jpg"
+              alt="44 Boxing athlete working the ring with a coach"
               loading="lazy"
               width={1400}
               height={1200}
