@@ -10,8 +10,8 @@
  */
 
 @theme inline {
-  --font-display: "Archivo", "Arial Black", sans-serif;
-  --font-sans: "Karla", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "presicav", "Arial Black", sans-serif;
+  --font-sans: "presicav", ui-sans-serif, system-ui, sans-serif;
 
   --radius-sm: 0px;
   --radius-md: 0px;
@@ -133,7 +133,7 @@
   h3,
   h4 {
     font-family: var(--font-display);
-    font-weight: 800;
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: -0.02em;
     line-height: 0.95;
