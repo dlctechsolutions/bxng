@@ -32,6 +32,7 @@ const links = [
   { to: "/admin/products", label: "Products" },
   { to: "/admin/collections", label: "Collections" },
   { to: "/admin/orders", label: "Orders" },
+  { to: "/admin/reviews", label: "Reviews" },
   { to: "/admin/users", label: "Users" },
 ] as const;
 
