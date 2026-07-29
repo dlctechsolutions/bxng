@@ -4,6 +4,7 @@ import { ArrowRight, Check } from "@/components/site/icons";
 import { Button } from "@/components/ui/button";
 import { ProductGrid } from "@/components/site/ProductGrid";
 import { getStorefront } from "@/lib/catalog.functions";
+import { cn } from "@/lib/utils";
 
 const storefrontQuery = queryOptions({
   queryKey: ["storefront"],
