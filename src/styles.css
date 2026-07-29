@@ -55,6 +55,7 @@
   --color-chart-3: var(--foreground);
   --color-chart-4: var(--border);
   --color-chart-5: var(--surface);
+  --color-blood: var(--blood);
 }
 
 :root {
