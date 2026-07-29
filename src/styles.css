@@ -109,6 +109,33 @@
     oklch(0 0 0 / 55%) 55%,
     transparent 100%
   );
+  --gradient-scrim-right: linear-gradient(
+    to left,
+    oklch(0 0 0 / 92%) 0%,
+    oklch(0 0 0 / 55%) 55%,
+    transparent 100%
+  );
+  /* Editorial overlays: soft top haze + weighted base so type always reads */
+  --gradient-editorial: linear-gradient(
+    to bottom,
+    oklch(0 0 0 / 55%) 0%,
+    oklch(0 0 0 / 15%) 32%,
+    oklch(0 0 0 / 45%) 68%,
+    oklch(0 0 0 / 88%) 100%
+  );
+  --gradient-vignette: radial-gradient(
+    120% 90% at 50% 45%,
+    transparent 38%,
+    oklch(0 0 0 / 38%) 78%,
+    oklch(0 0 0 / 72%) 100%
+  );
+  --gradient-vignette-soft: radial-gradient(
+    130% 100% at 50% 40%,
+    transparent 50%,
+    oklch(0 0 0 / 26%) 85%,
+    oklch(0 0 0 / 52%) 100%
+  );
+
 }
 
 .dark {
