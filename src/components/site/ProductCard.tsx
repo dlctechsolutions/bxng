@@ -2,7 +2,8 @@ import { Link } from "@tanstack/react-router";
 import { Heart, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { money, discountPercent, effectivePrice, num } from "@/lib/format";
+import { discountPercent, effectivePrice } from "@/lib/format";
+import { PriceTag, SaleBadge, StockBadge } from "./Price";
 import { useCart } from "@/lib/cart";
 import { useWishlist } from "@/lib/use-wishlist";
 import type { Product } from "@/lib/catalog.functions";
@@ -47,18 +48,11 @@ export function ProductCard({
         <div className="pointer-events-none absolute inset-0 vignette-soft opacity-70 transition-opacity duration-700 group-hover:opacity-40" />
 
         <div className="pointer-events-none absolute inset-x-0 top-0 flex items-start justify-between p-3">
-          <div className="flex flex-col gap-1">
-            {off !== null && (
-              <span className="bg-accent px-2 py-1 text-[0.625rem] font-bold uppercase tracking-widest text-accent-foreground">
-                Up to -{off}%
-              </span>
-            )}
-            {soldOut && (
-              <span className="border border-border bg-background/80 px-2 py-1 text-[0.625rem] font-bold uppercase tracking-widest text-muted-foreground">
-                Out of stock
-              </span>
-            )}
+          <div className="flex flex-col items-start gap-1">
+            <SaleBadge percent={off} prefix="Up to" />
+            {soldOut && <StockBadge />}
           </div>
+
           <button
             type="button"
             onClick={() => wishlist.toggle(product.id)}
@@ -90,14 +84,7 @@ export function ProductCard({
             </Link>
           </h3>
         </div>
-        <p className="flex items-baseline gap-2 text-sm">
-          {product.sale_price && (
-            <span className="text-muted-foreground line-through">{money(num(product.price))}</span>
-          )}
-          <span className={cn("font-semibold", product.sale_price && "text-accent")}>
-            {money(price)}
-          </span>
-        </p>
+        <PriceTag price={product.price} salePrice={product.sale_price} size="sm" />
         <div className="mt-auto">
           {soldOut ? (
             <Button variant="outline" className="w-full" disabled>

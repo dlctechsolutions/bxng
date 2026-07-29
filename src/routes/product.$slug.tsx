@@ -6,7 +6,8 @@ import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ProductGrid } from "@/components/site/ProductGrid";
 import { getProduct } from "@/lib/catalog.functions";
-import { money, num, discountPercent, effectivePrice } from "@/lib/format";
+import { discountPercent, effectivePrice } from "@/lib/format";
+import { PriceTag, SaleBadge } from "@/components/site/Price";
 import { useCart } from "@/lib/cart";
 import { useWishlist } from "@/lib/use-wishlist";
 import { cn } from "@/lib/utils";
@@ -124,11 +125,7 @@ function ProductPage() {
               height={1024}
               className="aspect-square w-full object-cover"
             />
-            {off !== null && (
-              <span className="absolute left-4 top-4 bg-accent px-2.5 py-1 text-[0.625rem] font-bold uppercase tracking-widest text-accent-foreground">
-                -{off}%
-              </span>
-            )}
+            <SaleBadge percent={off} size="lg" className="absolute left-4 top-4" />
           </div>
           {images.length > 1 && (
             <div className="flex gap-3">
@@ -156,14 +153,12 @@ function ProductPage() {
             <h1 className="mt-3 text-[clamp(2rem,4.5vw,3.25rem)]">{product.name}</h1>
           </div>
 
-          <p className="flex items-baseline gap-3">
-            {product.sale_price && (
-              <span className="text-lg text-muted-foreground line-through">
-                {money(num(product.price))}
-              </span>
-            )}
-            <span className="text-2xl font-semibold">{money(price)}</span>
-          </p>
+          <PriceTag
+            price={product.price}
+            salePrice={product.sale_price}
+            size="lg"
+            showBadge
+          />
 
           <p className="max-w-prose text-sm leading-relaxed text-muted-foreground">
             {product.description}

@@ -1,7 +1,8 @@
 import { Link } from "@tanstack/react-router";
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { money, discountPercent, effectivePrice, num } from "@/lib/format";
+import { effectivePrice } from "@/lib/format";
+import { PriceTag } from "./Price";
 import { useCart } from "@/lib/cart";
 import type { Product } from "@/lib/catalog.functions";
 
@@ -14,7 +15,6 @@ export function QuickView({
 }) {
   const cart = useCart();
   if (!product) return null;
-  const off = discountPercent(product.price, product.sale_price);
   const price = effectivePrice(product.price, product.sale_price);
   const image = product.images?.[0] ?? "/images/prod-luxe-onyx.jpg";
 
@@ -35,19 +35,12 @@ export function QuickView({
               <p className="eyebrow">{product.category}</p>
               <DialogTitle className="mt-2 text-2xl">{product.name}</DialogTitle>
             </div>
-            <p className="flex items-baseline gap-3">
-              {product.sale_price && (
-                <span className="text-muted-foreground line-through">
-                  {money(num(product.price))}
-                </span>
-              )}
-              <span className="text-xl font-semibold">{money(price)}</span>
-              {off !== null && (
-                <span className="bg-accent px-2 py-0.5 text-[0.625rem] font-bold uppercase tracking-widest text-accent-foreground">
-                  -{off}%
-                </span>
-              )}
-            </p>
+            <PriceTag
+              price={product.price}
+              salePrice={product.sale_price}
+              size="md"
+              showBadge
+            />
             <DialogDescription className="text-sm leading-relaxed text-muted-foreground">
               {product.description}
             </DialogDescription>
