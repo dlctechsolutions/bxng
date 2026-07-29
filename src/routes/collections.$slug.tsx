@@ -79,7 +79,9 @@ function CollectionPage() {
           height={900}
           className="h-[22rem] w-full object-cover md:h-[28rem]"
         />
-        <div className="absolute inset-0 bg-background/60" />
+        <div className="pointer-events-none absolute inset-0 bg-background/30" />
+        <div className="pointer-events-none absolute inset-0 editorial-overlay" />
+        <div className="pointer-events-none absolute inset-0 vignette" />
         <div className="shell absolute inset-0 flex flex-col justify-end pb-12">
           <p className="eyebrow">{collection.tagline}</p>
           <h1 className="mt-4 text-[clamp(2.25rem,6vw,4.5rem)]">{collection.name}</h1>
