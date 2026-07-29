@@ -286,13 +286,13 @@ function ProductPage() {
         </div>
       </section>
 
-      {data.related.length > 0 && (
+      {(data?.related.length ?? 0) > 0 && (
         <section className="shell pt-28">
           <h2 className="border-b border-border pb-6 text-[clamp(1.5rem,3vw,2.25rem)]">
             You might also like
           </h2>
           <div className="mt-12">
-            <ProductGrid products={data.related} />
+            <ProductGrid products={data!.related} />
           </div>
         </section>
       )}
