@@ -77,6 +77,8 @@ export function Footer() {
             <p>Mon–Fri, 09:00–17:00 GMT</p>
           </div>
         </div>
+
+        <NewsletterSignup />
       </div>
 
       <div className="border-t border-border">
