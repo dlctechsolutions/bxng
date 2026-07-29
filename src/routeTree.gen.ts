@@ -22,6 +22,7 @@ import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as ProductSlugRouteImport } from './routes/product.$slug'
 import { Route as CollectionsSlugRouteImport } from './routes/collections.$slug'
 import { Route as AdminProductsRouteImport } from './routes/admin.products'
+import { Route as AdminOrdersRouteImport } from './routes/admin.orders'
 import { Route as AdminCollectionsRouteImport } from './routes/admin.collections'
 import { Route as AuthenticatedAccountIndexRouteImport } from './routes/_authenticated/account.index'
 import { Route as AuthenticatedAccountOrdersRouteImport } from './routes/_authenticated/account.orders'
@@ -91,6 +92,11 @@ const AdminProductsRoute = AdminProductsRouteImport.update({
   path: '/products',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminOrdersRoute = AdminOrdersRouteImport.update({
+  id: '/orders',
+  path: '/orders',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminCollectionsRoute = AdminCollectionsRouteImport.update({
   id: '/collections',
   path: '/collections',
@@ -125,6 +131,7 @@ export interface FileRoutesByFullPath {
   '/the-44-story': typeof The44StoryRoute
   '/wishlist': typeof WishlistRoute
   '/admin/collections': typeof AdminCollectionsRoute
+  '/admin/orders': typeof AdminOrdersRoute
   '/admin/products': typeof AdminProductsRoute
   '/collections/$slug': typeof CollectionsSlugRoute
   '/product/$slug': typeof ProductSlugRoute
@@ -142,6 +149,7 @@ export interface FileRoutesByTo {
   '/the-44-story': typeof The44StoryRoute
   '/wishlist': typeof WishlistRoute
   '/admin/collections': typeof AdminCollectionsRoute
+  '/admin/orders': typeof AdminOrdersRoute
   '/admin/products': typeof AdminProductsRoute
   '/collections/$slug': typeof CollectionsSlugRoute
   '/product/$slug': typeof ProductSlugRoute
@@ -162,6 +170,7 @@ export interface FileRoutesById {
   '/the-44-story': typeof The44StoryRoute
   '/wishlist': typeof WishlistRoute
   '/admin/collections': typeof AdminCollectionsRoute
+  '/admin/orders': typeof AdminOrdersRoute
   '/admin/products': typeof AdminProductsRoute
   '/collections/$slug': typeof CollectionsSlugRoute
   '/product/$slug': typeof ProductSlugRoute
@@ -182,6 +191,7 @@ export interface FileRouteTypes {
     | '/the-44-story'
     | '/wishlist'
     | '/admin/collections'
+    | '/admin/orders'
     | '/admin/products'
     | '/collections/$slug'
     | '/product/$slug'
@@ -199,6 +209,7 @@ export interface FileRouteTypes {
     | '/the-44-story'
     | '/wishlist'
     | '/admin/collections'
+    | '/admin/orders'
     | '/admin/products'
     | '/collections/$slug'
     | '/product/$slug'
@@ -218,6 +229,7 @@ export interface FileRouteTypes {
     | '/the-44-story'
     | '/wishlist'
     | '/admin/collections'
+    | '/admin/orders'
     | '/admin/products'
     | '/collections/$slug'
     | '/product/$slug'
@@ -334,6 +346,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminProductsRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/orders': {
+      id: '/admin/orders'
+      path: '/orders'
+      fullPath: '/admin/orders'
+      preLoaderRoute: typeof AdminOrdersRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/collections': {
       id: '/admin/collections'
       path: '/collections'
@@ -382,12 +401,14 @@ const AuthenticatedRouteRouteWithChildren =
 
 interface AdminRouteChildren {
   AdminCollectionsRoute: typeof AdminCollectionsRoute
+  AdminOrdersRoute: typeof AdminOrdersRoute
   AdminProductsRoute: typeof AdminProductsRoute
   AdminIndexRoute: typeof AdminIndexRoute
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
   AdminCollectionsRoute: AdminCollectionsRoute,
+  AdminOrdersRoute: AdminOrdersRoute,
   AdminProductsRoute: AdminProductsRoute,
   AdminIndexRoute: AdminIndexRoute,
 }
