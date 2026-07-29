@@ -69,10 +69,9 @@ export function Footer() {
           <h4 className="text-sm tracking-[0.2em]">Company</h4>
           <div className="mt-5 space-y-3 text-sm text-muted-foreground">
             <p>44 Boxing Ltd</p>
-            <p>Unit 44, Forge Works, Manchester, M4 4BX</p>
             <p>
-              <a href="mailto:hello@44boxing.com" className="link-underline">
-                hello@44boxing.com
+              <a href="mailto:info@44bxng.com" className="link-underline">
+                info@44bxng.com
               </a>
             </p>
             <p>Mon–Fri, 09:00–17:00 GMT</p>
