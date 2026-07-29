@@ -47,18 +47,11 @@ export function ProductCard({
         <div className="pointer-events-none absolute inset-0 vignette-soft opacity-70 transition-opacity duration-700 group-hover:opacity-40" />
 
         <div className="pointer-events-none absolute inset-x-0 top-0 flex items-start justify-between p-3">
-          <div className="flex flex-col gap-1">
-            {off !== null && (
-              <span className="bg-accent px-2 py-1 text-[0.625rem] font-bold uppercase tracking-widest text-accent-foreground">
-                Up to -{off}%
-              </span>
-            )}
-            {soldOut && (
-              <span className="border border-border bg-background/80 px-2 py-1 text-[0.625rem] font-bold uppercase tracking-widest text-muted-foreground">
-                Out of stock
-              </span>
-            )}
+          <div className="flex flex-col items-start gap-1">
+            <SaleBadge percent={off} prefix="Up to" />
+            {soldOut && <StockBadge />}
           </div>
+
           <button
             type="button"
             onClick={() => wishlist.toggle(product.id)}
