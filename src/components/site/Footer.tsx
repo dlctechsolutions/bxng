@@ -74,7 +74,7 @@ export function Footer() {
                 info@44bxng.com
               </a>
             </p>
-            <p>Mon–Fri, 09:00–17:00 GMT</p>
+            
           </div>
         </div>
 
