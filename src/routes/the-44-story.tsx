@@ -31,7 +31,9 @@ function StoryPage() {
           height={1200}
           className="h-[26rem] w-full object-cover object-center md:h-[34rem]"
         />
-        <div className="absolute inset-0 bg-background/55" />
+        <div className="pointer-events-none absolute inset-0 bg-background/25" />
+        <div className="pointer-events-none absolute inset-0 editorial-overlay" />
+        <div className="pointer-events-none absolute inset-0 vignette" />
         <div className="shell absolute inset-0 flex flex-col justify-end pb-14">
           <p className="eyebrow">Est. 44</p>
           <h1 className="mt-4 max-w-3xl text-[clamp(2.25rem,7vw,5rem)]">The 44 Story</h1>
