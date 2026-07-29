@@ -198,9 +198,26 @@
   background-image: var(--gradient-scrim);
 }
 
+@utility scrim-right {
+  background-image: var(--gradient-scrim-right);
+}
+
 @utility fade-bottom {
   background-image: var(--gradient-fade);
 }
+
+@utility editorial-overlay {
+  background-image: var(--gradient-editorial);
+}
+
+@utility vignette {
+  background-image: var(--gradient-vignette);
+}
+
+@utility vignette-soft {
+  background-image: var(--gradient-vignette-soft);
+}
+
 
 @utility link-underline {
   position: relative;
