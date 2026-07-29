@@ -283,3 +283,43 @@ export const adminSetAdminRole = createServerFn({ method: "POST" })
     }
     return { ok: true };
   });
+
+export const adminListReviews = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }) => {
+    await assertAdmin(context);
+    const { data, error } = await context.supabase
+      .from("product_reviews")
+      .select("id, product_id, user_id, author_name, rating, title, body, status, created_at, product:products(name, slug)")
+      .order("created_at", { ascending: false });
+    if (error) throw error;
+    return (data ?? []) as any[];
+  });
+
+export const adminSetReviewStatus = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((data: { id: string; status: string }) => {
+    if (!["pending", "approved", "rejected"].includes(data.status)) {
+      throw new Error("Invalid review status.");
+    }
+    return data;
+  })
+  .handler(async ({ data, context }) => {
+    await assertAdmin(context);
+    const { error } = await context.supabase
+      .from("product_reviews")
+      .update({ status: data.status })
+      .eq("id", data.id);
+    if (error) throw error;
+    return { ok: true };
+  });
+
+export const adminDeleteReview = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((data: { id: string }) => data)
+  .handler(async ({ data, context }) => {
+    await assertAdmin(context);
+    const { error } = await context.supabase.from("product_reviews").delete().eq("id", data.id);
+    if (error) throw error;
+    return { ok: true };
+  });
