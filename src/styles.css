@@ -6,12 +6,20 @@
 
 /*
  * 44 BOXING — design system.
- * Dark, premium, minimal. All colors in oklch, all tokens semantic.
+ *
+ * THREE-LAYER TOKEN ARCHITECTURE
+ *  1. Primitives  (--palette-*)  raw values. The ONLY place literal colors live.
+ *  2. Semantics   (--background, --primary, ...) role names built from primitives.
+ *  3. Tailwind    (@theme inline) exposes semantics as utilities (bg-primary, ...).
+ *
+ * To swap the palette later: edit the `--palette-*` block in :root only
+ * (or add an alternate `[data-palette="..."]` block further down). No component
+ * styles, no utility classes, and no gradients need to change.
  */
 
 @theme inline {
-  --font-display: "presicav", "Arial Black", sans-serif;
-  --font-sans: "presicav", ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-family-display);
+  --font-sans: var(--font-family-sans);
 
   --radius-sm: 0px;
   --radius-md: 0px;
@@ -56,87 +64,154 @@
   --color-chart-4: var(--border);
   --color-chart-5: var(--surface);
   --color-blood: var(--blood);
+  --color-overlay: var(--overlay);
 }
 
 :root {
+  /* ------------------------------------------------------------------
+   * LAYER 1 — PRIMITIVES. The only literal values in the system.
+   * Swap these to re-skin the entire storefront.
+   * ------------------------------------------------------------------ */
+
+  /* Typography primitives */
+  --palette-font-display: "presicav", "Arial Black", sans-serif;
+  --palette-font-sans: "presicav", ui-sans-serif, system-ui, sans-serif;
+
+  /* Neutral ramp: 000 = page base, 900 = brightest type */
+  --palette-neutral-000: oklch(0 0 0);
+  --palette-neutral-050: oklch(0.05 0 0);
+  --palette-neutral-100: oklch(0.12 0 0);
+  --palette-neutral-200: oklch(0.18 0 0);
+  --palette-neutral-500: oklch(0.65 0 0);
+  --palette-neutral-900: oklch(1 0 0);
+
+  /* Brand ramp: accent red, used sparingly */
+  --palette-brand-500: oklch(0.55 0.24 27.5);
+  --palette-brand-600: oklch(0.48 0.22 27.5);
+  --palette-brand-contrast: oklch(1 0 0);
+
+  /* Overlay ink — every scrim, vignette and shadow is tinted from this */
+  --palette-overlay-ink: oklch(0 0 0);
+
+  /* ------------------------------------------------------------------
+   * LAYER 2 — SEMANTIC ROLES. Components only ever reference these.
+   * ------------------------------------------------------------------ */
+
   --radius: 0px;
 
-  --background: oklch(0 0 0);
-  --foreground: oklch(1 0 0);
+  --font-family-display: var(--palette-font-display);
+  --font-family-sans: var(--palette-font-sans);
 
-  --surface: oklch(0.12 0 0);
-  --surface-foreground: oklch(1 0 0);
+  --background: var(--palette-neutral-000);
+  --foreground: var(--palette-neutral-900);
 
-  --card: oklch(0.05 0 0);
-  --card-foreground: oklch(1 0 0);
+  --surface: var(--palette-neutral-100);
+  --surface-foreground: var(--palette-neutral-900);
 
-  --popover: oklch(0.05 0 0);
-  --popover-foreground: oklch(1 0 0);
+  --card: var(--palette-neutral-050);
+  --card-foreground: var(--palette-neutral-900);
 
-  /* Primary = blood red, used sparingly for key CTAs */
-  --primary: oklch(0.55 0.24 27.5);
-  --primary-foreground: oklch(1 0 0);
+  --popover: var(--palette-neutral-050);
+  --popover-foreground: var(--palette-neutral-900);
 
-  --secondary: oklch(0.12 0 0);
-  --secondary-foreground: oklch(1 0 0);
+  /* Primary = brand, key CTAs only */
+  --primary: var(--palette-brand-500);
+  --primary-foreground: var(--palette-brand-contrast);
 
-  --muted: oklch(0.12 0 0);
-  --muted-foreground: oklch(0.65 0 0);
+  --secondary: var(--palette-neutral-100);
+  --secondary-foreground: var(--palette-neutral-900);
 
-  /* Accent = blood red, flashes only */
-  --accent: oklch(0.55 0.24 27.5);
-  --accent-foreground: oklch(1 0 0);
+  --muted: var(--palette-neutral-100);
+  --muted-foreground: var(--palette-neutral-500);
 
-  --destructive: oklch(0.55 0.24 27.5);
-  --destructive-foreground: oklch(1 0 0);
+  /* Accent = brand flashes only */
+  --accent: var(--palette-brand-500);
+  --accent-foreground: var(--palette-brand-contrast);
 
-  --blood: oklch(0.48 0.22 27.5);
+  --destructive: var(--palette-brand-500);
+  --destructive-foreground: var(--palette-brand-contrast);
 
-  --border: oklch(0.18 0 0);
-  --input: oklch(0.18 0 0);
-  --ring: oklch(0.55 0.24 27.5);
+  --blood: var(--palette-brand-600);
 
-  --shadow-lift: 0 24px 60px -24px oklch(0 0 0 / 90%);
+  --border: var(--palette-neutral-200);
+  --input: var(--palette-neutral-200);
+  --ring: var(--palette-brand-500);
+
+  --overlay: var(--palette-overlay-ink);
+
+  /* Overlay opacity scale — tune editorial depth without touching gradients */
+  --overlay-alpha-faint: 15%;
+  --overlay-alpha-soft: 26%;
+  --overlay-alpha-mid: 45%;
+  --overlay-alpha-strong: 72%;
+  --overlay-alpha-max: 92%;
+
+  /* ------------------------------------------------------------------
+   * LAYER 2b — DERIVED EFFECTS. Built purely from semantic tokens.
+   * ------------------------------------------------------------------ */
+
+  --shadow-lift: 0 24px 60px -24px
+    color-mix(in oklab, var(--overlay) 90%, transparent);
   --gradient-fade: linear-gradient(
     to top,
-    oklch(0 0 0) 0%,
-    oklch(0 0 0 / 70%) 40%,
+    var(--overlay) 0%,
+    color-mix(in oklab, var(--overlay) 70%, transparent) 40%,
     transparent 100%
   );
   --gradient-scrim: linear-gradient(
     to right,
-    oklch(0 0 0 / 92%) 0%,
-    oklch(0 0 0 / 55%) 55%,
+    color-mix(in oklab, var(--overlay) var(--overlay-alpha-max), transparent) 0%,
+    color-mix(in oklab, var(--overlay) 55%, transparent) 55%,
     transparent 100%
   );
   --gradient-scrim-right: linear-gradient(
     to left,
-    oklch(0 0 0 / 92%) 0%,
-    oklch(0 0 0 / 55%) 55%,
+    color-mix(in oklab, var(--overlay) var(--overlay-alpha-max), transparent) 0%,
+    color-mix(in oklab, var(--overlay) 55%, transparent) 55%,
     transparent 100%
   );
   /* Editorial overlays: soft top haze + weighted base so type always reads */
   --gradient-editorial: linear-gradient(
     to bottom,
-    oklch(0 0 0 / 55%) 0%,
-    oklch(0 0 0 / 15%) 32%,
-    oklch(0 0 0 / 45%) 68%,
-    oklch(0 0 0 / 88%) 100%
+    color-mix(in oklab, var(--overlay) 55%, transparent) 0%,
+    color-mix(in oklab, var(--overlay) var(--overlay-alpha-faint), transparent)
+      32%,
+    color-mix(in oklab, var(--overlay) var(--overlay-alpha-mid), transparent)
+      68%,
+    color-mix(in oklab, var(--overlay) 88%, transparent) 100%
   );
   --gradient-vignette: radial-gradient(
     120% 90% at 50% 45%,
     transparent 38%,
-    oklch(0 0 0 / 38%) 78%,
-    oklch(0 0 0 / 72%) 100%
+    color-mix(in oklab, var(--overlay) 38%, transparent) 78%,
+    color-mix(in oklab, var(--overlay) var(--overlay-alpha-strong), transparent)
+      100%
   );
   --gradient-vignette-soft: radial-gradient(
     130% 100% at 50% 40%,
     transparent 50%,
-    oklch(0 0 0 / 26%) 85%,
-    oklch(0 0 0 / 52%) 100%
+    color-mix(in oklab, var(--overlay) var(--overlay-alpha-soft), transparent)
+      85%,
+    color-mix(in oklab, var(--overlay) 52%, transparent) 100%
   );
-
 }
+
+/*
+ * ALTERNATE PALETTES — add <html data-palette="ivory"> (or any name) to swap.
+ * Only primitives are redeclared; every semantic token and gradient follows.
+ * Example (inverted editorial light theme), disabled until opted into:
+ */
+[data-palette="ivory"] {
+  --palette-neutral-000: oklch(0.98 0.003 90);
+  --palette-neutral-050: oklch(1 0 0);
+  --palette-neutral-100: oklch(0.94 0.004 90);
+  --palette-neutral-200: oklch(0.87 0.005 90);
+  --palette-neutral-500: oklch(0.5 0.006 90);
+  --palette-neutral-900: oklch(0.16 0.004 90);
+  --palette-brand-contrast: oklch(0.99 0 0);
+  --palette-overlay-ink: oklch(0.16 0.004 90);
+}
+
 
 .dark {
   color-scheme: dark;
