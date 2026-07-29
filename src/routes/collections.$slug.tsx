@@ -61,13 +61,23 @@ function CollectionPage() {
   const { slug } = Route.useParams();
   const { data } = useSuspenseQuery(storefrontQuery);
   const [category, setCategory] = useState<string>("All");
+  const [query, setQuery] = useState("");
 
   const collection = data.collections.find((c) => c.slug === slug);
   if (!collection) throw notFound();
 
   const all = data.products.filter((p) => p.collection_id === collection.id);
   const categories = ["All", ...Array.from(new Set(all.map((p) => p.category)))];
-  const products = category === "All" ? all : all.filter((p) => p.category === category);
+  const q = query.trim().toLowerCase();
+  const products = all
+    .filter((p) => category === "All" || p.category === category)
+    .filter(
+      (p) =>
+        !q ||
+        p.name.toLowerCase().includes(q) ||
+        p.category.toLowerCase().includes(q) ||
+        (p.description ?? "").toLowerCase().includes(q),
+    );
 
   return (
     <>
