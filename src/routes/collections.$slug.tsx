@@ -1,6 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useSuspenseQuery, queryOptions } from "@tanstack/react-query";
 import { useState } from "react";
+import { Search, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ProductGrid } from "@/components/site/ProductGrid";
 import { getStorefront } from "@/lib/catalog.functions";
