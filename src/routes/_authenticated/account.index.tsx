@@ -38,6 +38,14 @@ function AccountOverview() {
         Signed in as <span className="text-foreground">{user?.email}</span>
       </p>
       <div className="mt-8 grid gap-4 sm:grid-cols-2">
+        {admin.data?.isAdmin && (
+          <Link to="/admin" className="border border-primary p-6 transition-colors hover:bg-secondary sm:col-span-2">
+            <h2 className="text-lg text-primary">Admin console</h2>
+            <p className="mt-2 text-sm text-muted-foreground">
+              Manage products, collections, orders and users.
+            </p>
+          </Link>
+        )}
         <Link to="/account/orders" className="border border-border p-6 transition-colors hover:border-foreground">
           <h2 className="text-lg">Orders</h2>
           <p className="mt-2 text-sm text-muted-foreground">Track and review past purchases.</p>
