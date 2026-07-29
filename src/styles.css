@@ -313,3 +313,76 @@
     transform-origin: left;
   }
 }
+
+/* ------------------------------------------------------------------
+ * INTERACTION LAYER
+ * Red is reserved for meaningful interactions: pressing a primary CTA,
+ * opening a nav menu, keyboard focus. Passive hovers stay neutral.
+ * ------------------------------------------------------------------ */
+
+@utility focus-flash {
+  &:focus-visible {
+    outline: 1px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+}
+
+@utility nav-link {
+  position: relative;
+  color: var(--color-foreground);
+  transition: color 0.25s ease;
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    height: 1px;
+    width: 100%;
+    background: var(--color-accent);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  &:hover::after,
+  &:focus-visible::after,
+  &[data-state="open"]::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+  &:focus-visible {
+    outline: none;
+  }
+}
+
+@utility icon-action {
+  color: var(--color-foreground);
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease;
+  &:hover {
+    color: var(--color-accent);
+  }
+  &:focus-visible {
+    outline: 1px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+}
+
+@utility menu-item-flash {
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 15%;
+    bottom: 15%;
+    width: 2px;
+    background: var(--color-accent);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+  &:focus::before,
+  &:hover::before {
+    opacity: 1;
+  }
+}
