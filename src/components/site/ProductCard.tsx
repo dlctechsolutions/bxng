@@ -64,7 +64,7 @@ export function ProductCard({
             onClick={() => wishlist.toggle(product.id)}
             aria-label={saved ? "Remove from wishlist" : "Add to wishlist"}
             aria-pressed={saved}
-            className="pointer-events-auto grid size-9 place-items-center border border-border bg-background/70 backdrop-blur transition-colors hover:border-foreground"
+            className="pointer-events-auto grid size-9 place-items-center border border-border bg-background/70 backdrop-blur transition-colors hover:border-accent hover:text-accent focus-flash"
           >
             <Heart className={cn("size-4", saved && "fill-accent text-accent")} />
           </button>
@@ -74,7 +74,7 @@ export function ProductCard({
           <button
             type="button"
             onClick={() => onQuickView(product)}
-            className="flex w-full items-center justify-center gap-2 border border-border bg-background/85 py-2 text-[0.625rem] font-bold uppercase tracking-[0.2em] backdrop-blur transition-colors hover:bg-foreground hover:text-background"
+            className="flex w-full items-center justify-center gap-2 border border-border bg-background/85 py-2 text-[0.625rem] font-bold uppercase tracking-[0.2em] backdrop-blur transition-colors hover:border-accent hover:bg-foreground hover:text-background focus-flash"
           >
             <Eye className="size-3.5" /> Quick view
           </button>
