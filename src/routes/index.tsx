@@ -51,7 +51,7 @@ function Home() {
           alt="44BXNG athlete on a rooftop overlooking the city skyline"
           width={2200}
           height={1650}
-          className="absolute inset-0 size-full object-cover object-center"
+          className="absolute inset-0 size-full object-cover object-center md:object-[center_top]"
 
         />
         <div className="pointer-events-none absolute inset-0 editorial-overlay" />
