@@ -6,8 +6,8 @@ import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ProductGrid } from "@/components/site/ProductGrid";
 import { getProduct } from "@/lib/catalog.functions";
-import { money, num, discountPercent, effectivePrice } from "@/lib/format";
-import { PriceTag } from "@/components/site/Price";
+import { discountPercent, effectivePrice } from "@/lib/format";
+import { PriceTag, SaleBadge } from "@/components/site/Price";
 import { useCart } from "@/lib/cart";
 import { useWishlist } from "@/lib/use-wishlist";
 import { cn } from "@/lib/utils";
@@ -125,11 +125,7 @@ function ProductPage() {
               height={1024}
               className="aspect-square w-full object-cover"
             />
-            {off !== null && (
-              <span className="absolute left-4 top-4 bg-accent px-2.5 py-1 text-[0.625rem] font-bold uppercase tracking-widest text-accent-foreground">
-                -{off}%
-              </span>
-            )}
+            <SaleBadge percent={off} size="lg" className="absolute left-4 top-4" />
           </div>
           {images.length > 1 && (
             <div className="flex gap-3">
