@@ -57,7 +57,7 @@ function Home() {
         <div className="pointer-events-none absolute inset-0 editorial-overlay" />
         <div className="pointer-events-none absolute inset-0 scrim-left" />
         <div className="pointer-events-none absolute inset-0 vignette" />
-        <div className="shell relative flex min-h-[78vh] flex-col justify-end pb-16 md:min-h-[86vh] md:pb-24">
+        <div className="shell relative flex min-h-[78vh] flex-col justify-end pt-28 pb-16 md:min-h-[86vh] md:pt-40 md:pb-24">
           <p className="eyebrow">Founding Collection</p>
           <h1 className="mt-5 max-w-4xl text-[clamp(2.75rem,8vw,6.5rem)]">
             Founding Collection
