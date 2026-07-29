@@ -20,10 +20,10 @@ export const Route = createFileRoute("/")({
         content:
           "Premium boxing gloves built for those that never settle. Shop the Luxe, Maverick and Nova collections while the founding run lasts.",
       },
-      { property: "og:title", content: "44 Boxing — Founding Collection" },
+      { property: "og:title", content: "44 Boxing — Founding Collection, Last of the First" },
       {
         property: "og:description",
-        content: "Top quality, affordable boxing gloves. Browse the last of the first.",
+        content: "Premium boxing gloves built for those that never settle. Shop the Luxe, Maverick and Nova collections while the founding run lasts.",
       },
     ],
   }),

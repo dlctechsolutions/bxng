@@ -81,15 +81,21 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "44 Boxing — Premium Boxing Gloves" },
+      { title: "44 Boxing — Founding Collection, Last of the First" },
       {
         name: "description",
         content:
-          "44 Boxing builds top quality, affordable boxing gloves for those that never settle.",
+          "Premium boxing gloves built for those that never settle. Shop the Luxe, Maverick and Nova collections while the founding run lasts.",
       },
       { property: "og:site_name", content: "44 Boxing" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:title", content: "44 Boxing — Founding Collection, Last of the First" },
+      { name: "twitter:title", content: "44 Boxing — Founding Collection, Last of the First" },
+      { property: "og:description", content: "Premium boxing gloves built for those that never settle. Shop the Luxe, Maverick and Nova collections while the founding run lasts." },
+      { name: "twitter:description", content: "Premium boxing gloves built for those that never settle. Shop the Luxe, Maverick and Nova collections while the founding run lasts." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/b65c03ca-4161-4eab-a5a7-b6b6e8575da8/id-preview-e0179b3e--f1c1ac19-b926-46f1-953c-36f2ebe56e3b.lovable.app-1785364640068.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/b65c03ca-4161-4eab-a5a7-b6b6e8575da8/id-preview-e0179b3e--f1c1ac19-b926-46f1-953c-36f2ebe56e3b.lovable.app-1785364640068.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
