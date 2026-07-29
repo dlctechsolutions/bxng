@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { Instagram, Facebook, Linkedin, Music2 } from "lucide-react";
 import { Logo } from "./Logo";
+import { NewsletterSignup } from "./NewsletterSignup";
 
 const links = [
   { to: "/the-44-story", label: "The 44 Story" },
