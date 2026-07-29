@@ -22,6 +22,7 @@ import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as ProductSlugRouteImport } from './routes/product.$slug'
 import { Route as CollectionsSlugRouteImport } from './routes/collections.$slug'
 import { Route as AdminProductsRouteImport } from './routes/admin.products'
+import { Route as AdminCollectionsRouteImport } from './routes/admin.collections'
 import { Route as AuthenticatedAccountIndexRouteImport } from './routes/_authenticated/account.index'
 import { Route as AuthenticatedAccountOrdersRouteImport } from './routes/_authenticated/account.orders'
 import { Route as AuthenticatedAccountDetailsRouteImport } from './routes/_authenticated/account.details'
@@ -90,6 +91,11 @@ const AdminProductsRoute = AdminProductsRouteImport.update({
   path: '/products',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminCollectionsRoute = AdminCollectionsRouteImport.update({
+  id: '/collections',
+  path: '/collections',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AuthenticatedAccountIndexRoute =
   AuthenticatedAccountIndexRouteImport.update({
     id: '/account/',
@@ -118,6 +124,7 @@ export interface FileRoutesByFullPath {
   '/reset-password': typeof ResetPasswordRoute
   '/the-44-story': typeof The44StoryRoute
   '/wishlist': typeof WishlistRoute
+  '/admin/collections': typeof AdminCollectionsRoute
   '/admin/products': typeof AdminProductsRoute
   '/collections/$slug': typeof CollectionsSlugRoute
   '/product/$slug': typeof ProductSlugRoute
@@ -134,6 +141,7 @@ export interface FileRoutesByTo {
   '/reset-password': typeof ResetPasswordRoute
   '/the-44-story': typeof The44StoryRoute
   '/wishlist': typeof WishlistRoute
+  '/admin/collections': typeof AdminCollectionsRoute
   '/admin/products': typeof AdminProductsRoute
   '/collections/$slug': typeof CollectionsSlugRoute
   '/product/$slug': typeof ProductSlugRoute
@@ -153,6 +161,7 @@ export interface FileRoutesById {
   '/reset-password': typeof ResetPasswordRoute
   '/the-44-story': typeof The44StoryRoute
   '/wishlist': typeof WishlistRoute
+  '/admin/collections': typeof AdminCollectionsRoute
   '/admin/products': typeof AdminProductsRoute
   '/collections/$slug': typeof CollectionsSlugRoute
   '/product/$slug': typeof ProductSlugRoute
@@ -172,6 +181,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/the-44-story'
     | '/wishlist'
+    | '/admin/collections'
     | '/admin/products'
     | '/collections/$slug'
     | '/product/$slug'
@@ -188,6 +198,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/the-44-story'
     | '/wishlist'
+    | '/admin/collections'
     | '/admin/products'
     | '/collections/$slug'
     | '/product/$slug'
@@ -206,6 +217,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/the-44-story'
     | '/wishlist'
+    | '/admin/collections'
     | '/admin/products'
     | '/collections/$slug'
     | '/product/$slug'
@@ -322,6 +334,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminProductsRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/collections': {
+      id: '/admin/collections'
+      path: '/collections'
+      fullPath: '/admin/collections'
+      preLoaderRoute: typeof AdminCollectionsRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/_authenticated/account/': {
       id: '/_authenticated/account/'
       path: '/account'
@@ -362,11 +381,13 @@ const AuthenticatedRouteRouteWithChildren =
   AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
 
 interface AdminRouteChildren {
+  AdminCollectionsRoute: typeof AdminCollectionsRoute
   AdminProductsRoute: typeof AdminProductsRoute
   AdminIndexRoute: typeof AdminIndexRoute
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
+  AdminCollectionsRoute: AdminCollectionsRoute,
   AdminProductsRoute: AdminProductsRoute,
   AdminIndexRoute: AdminIndexRoute,
 }
