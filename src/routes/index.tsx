@@ -48,10 +48,11 @@ function Home() {
       <section className="relative isolate min-h-[78vh] overflow-hidden md:min-h-[86vh]">
         <img
           src="/images/hero.jpg"
-          alt="Boxer in premium 44 Boxing gloves under dramatic light"
-          width={1920}
-          height={1088}
+          alt="44BXNG athlete throwing a jab in the ring"
+          width={2200}
+          height={1650}
           className="absolute inset-0 size-full object-cover object-center"
+
         />
         <div className="pointer-events-none absolute inset-0 editorial-overlay" />
         <div className="pointer-events-none absolute inset-0 scrim-left" />
