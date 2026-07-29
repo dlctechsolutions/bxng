@@ -117,14 +117,17 @@ function Home() {
       {/* Brand story */}
       <section className="mt-28 border-y border-border bg-surface">
         <div className="grid lg:grid-cols-2">
-          <img
-            src="/images/story.jpg"
-            alt="Boxer training alone in a dark warehouse gym"
-            loading="lazy"
-            width={1400}
-            height={1200}
-            className="h-full max-h-[46rem] w-full object-cover"
-          />
+          <div className="relative isolate overflow-hidden">
+            <img
+              src="/images/story.jpg"
+              alt="Boxer training alone in a dark warehouse gym"
+              loading="lazy"
+              width={1400}
+              height={1200}
+              className="h-full max-h-[46rem] w-full object-cover"
+            />
+            <div className="pointer-events-none absolute inset-0 vignette-soft" />
+          </div>
           <div className="flex flex-col justify-center gap-8 px-6 py-16 md:px-14 md:py-24">
             <div>
               <p className="eyebrow">The 44 Story</p>
