@@ -5,6 +5,7 @@ import { Heart, Truck, Shield, Repeat } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ProductGrid } from "@/components/site/ProductGrid";
+import { ProductReviews, Stars } from "@/components/site/ProductReviews";
 import { getProduct } from "@/lib/catalog.functions";
 import { discountPercent, effectivePrice } from "@/lib/format";
 import { PriceTag, SaleBadge } from "@/components/site/Price";
