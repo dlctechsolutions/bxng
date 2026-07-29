@@ -48,7 +48,7 @@ function Home() {
       <section className="relative isolate min-h-[78vh] overflow-hidden md:min-h-[86vh]">
         <img
           src="/images/hero.jpg"
-          alt="44BXNG athlete throwing a jab in the ring"
+          alt="44BXNG athlete on a rooftop overlooking the city skyline"
           width={2200}
           height={1650}
           className="absolute inset-0 size-full object-cover object-center"
