@@ -1,25 +1,22 @@
 import { Link } from "@tanstack/react-router";
 import { cn } from "@/lib/utils";
+import logoAsset from "@/assets/44bxng-logo.png.asset.json";
 
 export function Logo({ className, small }: { className?: string; small?: boolean }) {
   return (
-    <Link to="/" className={cn("group inline-flex items-baseline gap-2", className)}>
-      <span
+    <Link
+      to="/"
+      aria-label="44BXNG home"
+      className={cn("group inline-flex items-center", className)}
+    >
+      <img
+        src={logoAsset.url}
+        alt="44BXNG"
         className={cn(
-          "font-display font-extrabold uppercase leading-none tracking-tighter",
-          small ? "text-xl" : "text-2xl",
+          "w-auto opacity-90 transition-opacity group-hover:opacity-100",
+          small ? "h-6" : "h-8",
         )}
-      >
-        44
-      </span>
-      <span
-        className={cn(
-          "font-display uppercase leading-none tracking-[0.4em] text-muted-foreground transition-colors group-hover:text-foreground",
-          small ? "text-[0.6rem]" : "text-[0.7rem]",
-        )}
-      >
-        Boxing
-      </span>
+      />
     </Link>
   );
 }
