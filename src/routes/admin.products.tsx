@@ -268,18 +268,12 @@ function AdminProducts() {
                 />
               </div>
               <div className="sm:col-span-2">
-                <Label>Image URLs (one per line)</Label>
-                <Textarea
-                  rows={3}
-                  value={(editing.images ?? []).join("\n")}
-                  onChange={(e) =>
-                    setEditing({
-                      ...editing,
-                      images: e.target.value.split("\n").map((s) => s.trim()).filter(Boolean),
-                    })
-                  }
+                <ProductImageUploader
+                  images={editing.images ?? []}
+                  onChange={(images) => setEditing({ ...editing, images })}
                 />
               </div>
+
               <div className="sm:col-span-2">
                 <Label>Description</Label>
                 <Textarea
