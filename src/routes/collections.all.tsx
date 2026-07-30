@@ -1,11 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useSuspenseQuery, queryOptions } from "@tanstack/react-query";
 import { useState } from "react";
-import { Search, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ProductGrid } from "@/components/site/ProductGrid";
+import { FilterBar } from "@/components/site/FilterBar";
 import { getStorefront } from "@/lib/catalog.functions";
-import { allColors, productColors, COLOR_SWATCHES } from "@/lib/product-colors";
+import { allColors, productColors } from "@/lib/product-colors";
+
 
 const storefrontQuery = queryOptions({
   queryKey: ["storefront"],
@@ -61,35 +62,12 @@ function AllGlovesPage() {
         (p.description ?? "").toLowerCase().includes(q),
     );
 
-  const filterButton = (
-    label: string,
-    active: boolean,
-    onClick: () => void,
-    swatch?: string,
-  ) => (
-    <button
-      key={label}
-      type="button"
-      onClick={onClick}
-      aria-pressed={active}
-      className={
-        "flex items-center gap-2 border px-4 py-2 text-[0.65rem] font-bold uppercase tracking-[0.18em] transition-colors focus-flash " +
-        (active
-          ? "border-foreground bg-foreground text-background"
-          : "border-border text-muted-foreground hover:border-foreground hover:text-foreground")
-      }
-    >
-      {swatch && (
-        <span
-          aria-hidden
-          className="size-3 rounded-full border border-border/60"
-          style={{ backgroundColor: swatch }}
-        />
-      )}
-      {label}
-    </button>
-  );
-
+  const clearAll = () => {
+    setQuery("");
+    setCategory("All");
+    setRange("All");
+    setColor("All");
+  };
 
   return (
     <>
@@ -114,86 +92,29 @@ function AllGlovesPage() {
       </section>
 
       <section className="shell pt-12">
-        <div className="flex flex-col gap-6 border-b border-border pb-6">
-          <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
-            <div className="flex flex-col gap-4">
-              <div className="flex flex-wrap items-center gap-2">
-                <span className="eyebrow mr-3">Range</span>
-                {ranges.map((r) =>
-                  filterButton(r, range === r, () => setRange(r)),
-                )}
-              </div>
-              <div className="flex flex-wrap items-center gap-2">
-                <span className="eyebrow mr-3">Type</span>
-                {categories.map((c) =>
-                  filterButton(c, category === c, () => setCategory(c)),
-                )}
-              </div>
-              <div className="flex flex-wrap items-center gap-2">
-                <span className="eyebrow mr-3">Colour</span>
-                {colors.map((c) =>
-                  filterButton(
-                    c,
-                    color === c,
-                    () => setColor(c),
-                    c === "All" ? undefined : COLOR_SWATCHES[c],
-                  ),
-                )}
-              </div>
-            </div>
+        <FilterBar
+          searchId="all-search"
+          searchLabel="Search all gloves"
+          query={query}
+          onQueryChange={setQuery}
+          count={products.length}
+          onClear={clearAll}
+          groups={[
+            { id: "range", label: "Range", options: ranges, value: range, onChange: setRange },
+            { id: "type", label: "Type", options: categories, value: category, onChange: setCategory },
+            { id: "colour", label: "Colour", options: colors, value: color, onChange: setColor, swatches: true },
+          ]}
+        />
 
-
-            <div className="relative w-full lg:max-w-xs">
-              <Search
-                aria-hidden
-                className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground"
-              />
-              <label htmlFor="all-search" className="sr-only">
-                Search all gloves
-              </label>
-              <input
-                id="all-search"
-                type="search"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search products"
-                className="focus-flash w-full border border-border bg-card py-2.5 pl-10 pr-10 text-xs uppercase tracking-[0.16em] text-foreground placeholder:text-muted-foreground hover:border-foreground/40"
-              />
-              {query && (
-                <button
-                  type="button"
-                  onClick={() => setQuery("")}
-                  aria-label="Clear search"
-                  className="icon-action absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground"
-                >
-                  <X className="size-4" />
-                </button>
-              )}
-            </div>
-          </div>
-        </div>
-
-        <p className="mt-6 text-xs text-muted-foreground">
-          {products.length} product{products.length === 1 ? "" : "s"}
-          {q ? ` matching "${query.trim()}"` : ""}
-        </p>
 
         <div className="mt-8">
           {products.length === 0 ? (
             <div className="border border-border bg-card px-6 py-20 text-center">
               <p className="text-sm text-muted-foreground">No products match your filters.</p>
-              <Button
-                variant="outline"
-                className="mt-6"
-                onClick={() => {
-                  setQuery("");
-                  setCategory("All");
-                  setRange("All");
-                  setColor("All");
-                }}
-              >
+              <Button variant="outline" className="mt-6" onClick={clearAll}>
                 Clear filters
               </Button>
+
             </div>
           ) : (
             <ProductGrid products={products} columns={4} />
