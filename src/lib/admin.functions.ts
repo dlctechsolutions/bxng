@@ -82,7 +82,7 @@ export const adminListProducts = createServerFn({ method: "GET" })
     const { data, error } = await context.supabase
       .from("products")
       .select(
-        "id, collection_id, slug, name, category, description, details, price, sale_price, images, has_variants, in_stock, featured, sort_order, product_variants(id, product_id, color, fastening, stock)",
+        "id, collection_id, slug, name, category, description, details, price, sale_price, images, has_variants, in_stock, featured, sort_order, product_variants(id, product_id, color, fastening, size, sku, stock)",
       )
       .order("sort_order");
     if (error) throw error;
