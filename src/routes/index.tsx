@@ -62,7 +62,7 @@ function Home() {
         <div className="pointer-events-none absolute inset-0 scrim-left" />
         <div className="pointer-events-none absolute inset-0 vignette" />
         <div className="shell relative flex min-h-[78vh] flex-col justify-end pt-28 pb-16 md:min-h-[86vh] md:pt-40 md:pb-24">
-          <p className="eyebrow">The Founding Collection — Final Run</p>
+          <p className="eyebrow uppercase">The Founding Collection</p>
           <h1 className="mt-5 max-w-4xl text-[clamp(2.75rem,8vw,6.5rem)]">
             Last of the First
             <span className="block text-muted-foreground">Founding Collection</span>
