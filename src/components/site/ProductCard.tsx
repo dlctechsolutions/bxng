@@ -24,6 +24,7 @@ export function ProductCard({
   const image = product.images?.[0] ?? "/images/prod-luxe-onyx.jpg";
   const soldOut = !product.in_stock;
   const saved = wishlist.has(product.id);
+  const rating = useRating(product.id);
 
   return (
     <article className="group relative flex flex-col">
