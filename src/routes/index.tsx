@@ -51,7 +51,7 @@ function Home() {
   return (
     <>
       {/* Hero */}
-      <section className="relative isolate min-h-[78vh] overflow-hidden md:min-h-[86vh]">
+      <section className="relative isolate min-h-svh overflow-hidden [min-height:100dvh]">
         <img
           src="/images/hero.jpg"
           alt="44BXNG athlete on a rooftop overlooking the city skyline"
@@ -63,7 +63,7 @@ function Home() {
         <div className="pointer-events-none absolute inset-0 editorial-overlay" />
         <div className="pointer-events-none absolute inset-0 scrim-left" />
         <div className="pointer-events-none absolute inset-0 vignette" />
-        <div className="shell relative flex min-h-[78vh] flex-col items-center justify-center py-24 text-center md:min-h-[86vh]">
+        <div className="shell relative flex min-h-svh flex-col items-center justify-center py-24 text-center [min-height:100dvh]">
           <div className="flex flex-col items-center gap-6">
             <Button
               asChild
