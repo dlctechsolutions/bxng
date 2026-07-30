@@ -12,21 +12,27 @@ const storefrontQuery = queryOptions({
 });
 
 const TITLES: Record<string, { title: string; description: string }> = {
-  luxe: {
-    title: "Luxe Collection — Hand-Stitched Leather Gloves | 44 Boxing",
+  nova: {
+    title: "Nova — Tier I of The Last of the First | 44 Boxing",
     description:
-      "Full-grain leather, triple-density foam, hand-stitched. The founding 44 Boxing collection.",
+      "Nova is the original entry tier of the founding collection. Lightweight, low-profile speed gloves — final run before the next campaign.",
   },
   maverick: {
-    title: "Maverick Collection — Everyday Training Gloves | 44 Boxing",
+    title: "Maverick — Tier II of The Last of the First | 44 Boxing",
     description:
-      "Ten Maverick silhouettes built for volume training. Durable, responsive and sharply priced.",
+      "Maverick is the mid tier of the founding collection. Ten silhouettes built for volume training — final run before the next campaign.",
   },
-  nova: {
-    title: "Nova Collection — Lightweight Speed Gloves | 44 Boxing",
+  luxe: {
+    title: "Luxe — Tier III of The Last of the First | 44 Boxing",
     description:
-      "Low-profile Nova gloves with anatomical grip bar and dual-density foam. Made for speed.",
+      "Luxe is the premium tier of the founding collection. Full-grain leather, hand-stitched — final run before the next campaign.",
   },
+};
+
+const TIERS: Record<string, string> = {
+  nova: "Tier I — The Original Range",
+  maverick: "Tier II — The Mid Range",
+  luxe: "Tier III — The Premium Range",
 };
 
 export const Route = createFileRoute("/collections/$slug")({
