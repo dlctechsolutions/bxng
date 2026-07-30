@@ -52,6 +52,11 @@ export function ProductCard({
 
         <div className="pointer-events-none absolute inset-x-0 top-0 flex items-start justify-between p-3">
           <div className="flex flex-col items-start gap-1">
+            {product.featured && (
+              <span className="inline-block border border-foreground/70 bg-background/70 px-2 py-1 text-[0.5625rem] font-bold uppercase tracking-[0.2em] text-foreground backdrop-blur">
+                Selected
+              </span>
+            )}
             <SaleBadge percent={off} prefix="Up to" />
             {soldOut && <StockBadge />}
           </div>

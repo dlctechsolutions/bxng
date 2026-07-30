@@ -41,9 +41,12 @@ export const Route = createFileRoute("/")({
 
 function Home() {
   const { data } = useSuspenseQuery(storefrontQuery);
+  const featuredFirst = (list: typeof data.products) =>
+    [...list].sort((a, b) => Number(b.featured) - Number(a.featured));
   const byCollection = (slug: string) =>
-    data.products.filter((p) => p.collection?.slug === slug);
+    featuredFirst(data.products.filter((p) => p.collection?.slug === slug));
 
+  const selected = data.products.filter((p) => p.featured).slice(0, 4);
   const luxe = byCollection("luxe").slice(0, 3);
   const maverick = byCollection("maverick").slice(0, 10);
   const nova = byCollection("nova").slice(0, 3);
@@ -153,6 +156,29 @@ function Home() {
           ))}
         </div>
       </section>
+
+      {/* Selected by 44 — driven by the Featured toggle in the admin console */}
+      {selected.length > 0 && (
+        <section className="shell mt-24">
+          <div className="flex flex-wrap items-end justify-between gap-4 border-b border-border pb-6">
+            <div>
+              <p className="eyebrow">Selected by 44</p>
+              <h2 className="mt-3 text-[clamp(1.5rem,3.5vw,2.5rem)]">Hand-Picked From The Final Run</h2>
+            </div>
+            <Link
+              to="/collections/all"
+              className="inline-flex items-center text-[0.65rem] font-bold uppercase tracking-[0.2em] hover:text-accent focus-flash"
+            >
+              Shop all <ArrowRight className="ml-2 size-3.5" />
+            </Link>
+          </div>
+          <div className="mt-10">
+            <ProductGrid products={selected} columns={4} />
+          </div>
+        </section>
+      )}
+
+
 
       <RangeBanner
         image={novaBanner.url}
