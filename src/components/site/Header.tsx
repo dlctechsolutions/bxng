@@ -58,7 +58,10 @@ export function Header() {
                   The 44 Story
                 </Link>
                 <div>
-                  <p className="eyebrow">Boxing Gloves</p>
+                  <p className="eyebrow">The Last of the First</p>
+                  <p className="mt-1 text-[0.65rem] uppercase tracking-[0.16em] text-muted-foreground">
+                    The Founding Collection — final run
+                  </p>
                   <div className="mt-3 flex flex-col gap-3">
                     {collections.map((c) => (
                       <Link
