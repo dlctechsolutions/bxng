@@ -173,10 +173,11 @@ export type Database = {
           id: string
           product_id: string
           rating: number
+          source: string
           status: string
           title: string | null
           updated_at: string
-          user_id: string
+          user_id: string | null
         }
         Insert: {
           author_name?: string | null
@@ -185,10 +186,11 @@ export type Database = {
           id?: string
           product_id: string
           rating: number
+          source?: string
           status?: string
           title?: string | null
           updated_at?: string
-          user_id: string
+          user_id?: string | null
         }
         Update: {
           author_name?: string | null
@@ -197,10 +199,11 @@ export type Database = {
           id?: string
           product_id?: string
           rating?: number
+          source?: string
           status?: string
           title?: string | null
           updated_at?: string
-          user_id?: string
+          user_id?: string | null
         }
         Relationships: [
           {
