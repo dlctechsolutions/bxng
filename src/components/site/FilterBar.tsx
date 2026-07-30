@@ -193,7 +193,7 @@ export function FilterBar({
               <span className="shrink-0 text-[0.6rem] font-bold uppercase tracking-[0.22em] text-muted-foreground sm:w-20">
                 {group.label}
               </span>
-              <div className="-mx-3 flex snap-x items-center gap-2 overflow-x-auto px-3 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0 sm:pb-0">
+              <div className="flex flex-wrap items-center gap-2">
                 {group.options.map((o) =>
                   group.swatches && o !== "All" ? (
                     <Swatch
