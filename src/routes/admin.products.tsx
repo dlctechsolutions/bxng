@@ -360,6 +360,10 @@ function AdminProducts() {
                     <Input defaultValue={v.fastening} id={`f-${v.id}`} />
                   </div>
                   <div className="w-24">
+                    <Label>Size</Label>
+                    <Input defaultValue={v.size ?? ""} id={`z-${v.id}`} />
+                  </div>
+                  <div className="w-24">
                     <Label>Stock</Label>
                     <Input type="number" defaultValue={v.stock} id={`s-${v.id}`} />
                   </div>
@@ -371,6 +375,8 @@ function AdminProducts() {
                         product_id: v.product_id,
                         color: (document.getElementById(`c-${v.id}`) as HTMLInputElement).value,
                         fastening: (document.getElementById(`f-${v.id}`) as HTMLInputElement).value,
+                        size:
+                          (document.getElementById(`z-${v.id}`) as HTMLInputElement).value || null,
                         stock: Number((document.getElementById(`s-${v.id}`) as HTMLInputElement).value),
                       })
                     }
@@ -381,6 +387,7 @@ function AdminProducts() {
                     Remove
                   </Button>
                 </div>
+
               ))}
             <div className="flex flex-wrap items-end gap-2 border border-dashed border-border p-3">
               <div className="flex-1">
@@ -392,6 +399,10 @@ function AdminProducts() {
                 <Input id="new-fastening" placeholder="Velcro" />
               </div>
               <div className="w-24">
+                <Label>Size</Label>
+                <Input id="new-size" placeholder="12oz" />
+              </div>
+              <div className="w-24">
                 <Label>Stock</Label>
                 <Input id="new-stock" type="number" defaultValue={0} />
               </div>
@@ -400,14 +411,16 @@ function AdminProducts() {
                 onClick={() => {
                   const color = (document.getElementById("new-color") as HTMLInputElement).value;
                   const fastening = (document.getElementById("new-fastening") as HTMLInputElement).value;
+                  const size = (document.getElementById("new-size") as HTMLInputElement).value || null;
                   const stock = Number((document.getElementById("new-stock") as HTMLInputElement).value);
                   if (!color || !fastening) {
                     toast.error("Colour and fastening are required");
                     return;
                   }
-                  variantSave.mutate({ product_id: variantsFor.id, color, fastening, stock });
+                  variantSave.mutate({ product_id: variantsFor.id, color, fastening, size, stock });
                 }}
               >
+
                 Add
               </Button>
             </div>

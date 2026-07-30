@@ -82,7 +82,7 @@ export const adminListProducts = createServerFn({ method: "GET" })
     const { data, error } = await context.supabase
       .from("products")
       .select(
-        "id, collection_id, slug, name, category, description, details, price, sale_price, images, has_variants, in_stock, featured, sort_order, product_variants(id, product_id, color, fastening, stock)",
+        "id, collection_id, slug, name, category, description, details, price, sale_price, images, has_variants, in_stock, featured, sort_order, product_variants(id, product_id, color, fastening, size, sku, stock)",
       )
       .order("sort_order");
     if (error) throw error;
@@ -137,9 +137,17 @@ export const adminDeleteProduct = createServerFn({ method: "POST" })
 export const adminSaveVariant = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator(
-    (data: { id?: string; product_id: string; color: string; fastening: string; stock: number }) =>
-      data,
+    (data: {
+      id?: string;
+      product_id: string;
+      color: string;
+      fastening: string;
+      size?: string | null;
+      sku?: string | null;
+      stock: number;
+    }) => data,
   )
+
   .handler(async ({ data, context }) => {
     await assertAdmin(context);
     const payload: any = { ...data };

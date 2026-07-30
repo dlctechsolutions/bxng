@@ -50,8 +50,8 @@ function ProductPage() {
   const cart = useCart();
   const wishlist = useWishlist();
   const [activeImage, setActiveImage] = useState(0);
-  const [color, setColor] = useState<string | null>(null);
-  const [fastening, setFastening] = useState<string | null>(null);
+  const [size, setSize] = useState<string | null>(null);
+
 
   const product = data?.product;
   const fetchReviews = useServerFn(getProductReviews);
@@ -65,14 +65,19 @@ function ProductPage() {
     count: reviewsQuery.data?.count ?? 0,
   };
   const variants = useMemo(() => product?.product_variants ?? [], [product]);
-  const colors = useMemo(
-    () => Array.from(new Set(variants.map((v) => v.color))),
+  const sizes = useMemo(
+    () => Array.from(new Set(variants.map((v) => v.size).filter(Boolean) as string[])),
     [variants],
   );
-  const fastenings = useMemo(
-    () => Array.from(new Set(variants.map((v) => v.fastening))),
+  const colourLabel = useMemo(
+    () => Array.from(new Set(variants.map((v) => v.color))).join(" / "),
     [variants],
   );
+  const fasteningLabel = useMemo(
+    () => Array.from(new Set(variants.map((v) => v.fastening))).join(" / "),
+    [variants],
+  );
+
 
   if (!product) {
     return (
@@ -88,12 +93,12 @@ function ProductPage() {
   const price = effectivePrice(product.price, product.sale_price);
   const off = discountPercent(product.price, product.sale_price);
   const images = product.images?.length ? product.images : ["/images/prod-luxe-onyx.jpg"];
-  const selected = variants.find((v) => v.color === color && v.fastening === fastening) ?? null;
-  const stockFor = (c: string, f: string) =>
-    variants.find((v) => v.color === c && v.fastening === f)?.stock ?? 0;
-  const needsVariant = product.has_variants;
+  const selected =
+    (size !== null ? variants.find((v) => v.size === size) : variants[0]) ?? null;
+  const stockForSize = (s: string) => variants.find((v) => v.size === s)?.stock ?? 0;
+  const needsVariant = product.has_variants && sizes.length > 1;
   const canAdd =
-    product.in_stock && (!needsVariant || (selected !== null && selected.stock > 0));
+    product.in_stock && (!needsVariant || (size !== null && (selected?.stock ?? 0) > 0));
 
   function addToCart() {
     if (!canAdd) return;
@@ -102,7 +107,10 @@ function ProductPage() {
       variantId: selected?.id ?? null,
       slug: product!.slug,
       name: product!.name,
-      variantLabel: selected ? `${selected.color} · ${selected.fastening}` : null,
+      variantLabel: selected
+        ? [selected.size, selected.color, selected.fastening].filter(Boolean).join(" · ")
+        : null,
+
       image: images[0],
       unitPrice: price,
     });
@@ -186,73 +194,76 @@ function ProductPage() {
             {product.description}
           </p>
 
-          {needsVariant && (
-            <div className="space-y-6">
-              <div>
-                <p className="eyebrow">Colour {color ? `— ${color}` : ""}</p>
-                <div className="mt-3 flex flex-wrap gap-2">
-                  {colors.map((c) => (
-                    <button
-                      key={c}
-                      type="button"
-                      onClick={() => setColor(c)}
-                      className={cn(
-                        "border px-4 py-2 text-[0.65rem] font-bold uppercase tracking-[0.18em] transition-colors",
-                        color === c
-                          ? "border-foreground bg-foreground text-background"
-                          : "border-border text-muted-foreground hover:border-foreground hover:text-foreground",
-                      )}
-                    >
-                      {c}
-                    </button>
-                  ))}
+          <div className="space-y-6">
+            <dl className="flex flex-wrap gap-x-10 gap-y-2 text-xs text-muted-foreground">
+              {colourLabel && (
+                <div>
+                  <dt className="eyebrow">Colour</dt>
+                  <dd className="mt-1 text-foreground">{colourLabel}</dd>
                 </div>
-              </div>
+              )}
+              {fasteningLabel && (
+                <div>
+                  <dt className="eyebrow">Fastening</dt>
+                  <dd className="mt-1 text-foreground">{fasteningLabel}</dd>
+                </div>
+              )}
+            </dl>
+
+            {needsVariant ? (
               <div>
-                <p className="eyebrow">Fastening {fastening ? `— ${fastening}` : ""}</p>
+                <p className="eyebrow">Size {size ? `— ${size}` : ""}</p>
                 <div className="mt-3 flex flex-wrap gap-2">
-                  {fastenings.map((f) => {
-                    const unavailable = color !== null && stockFor(color, f) === 0;
+                  {sizes.map((s) => {
+                    const unavailable = stockForSize(s) === 0;
                     return (
                       <button
-                        key={f}
+                        key={s}
                         type="button"
-                        onClick={() => setFastening(f)}
+                        onClick={() => setSize(s)}
                         disabled={unavailable}
                         className={cn(
                           "border px-4 py-2 text-[0.65rem] font-bold uppercase tracking-[0.18em] transition-colors",
-                          fastening === f
+                          size === s
                             ? "border-foreground bg-foreground text-background"
                             : "border-border text-muted-foreground hover:border-foreground hover:text-foreground",
-                          unavailable && "cursor-not-allowed line-through opacity-40 hover:border-border",
+                          unavailable &&
+                            "cursor-not-allowed line-through opacity-40 hover:border-border",
                         )}
                       >
-                        {f}
+                        {s}
                       </button>
                     );
                   })}
                 </div>
               </div>
-              {selected && (
-                <p className="text-xs text-muted-foreground">
-                  {selected.stock > 0
-                    ? `${selected.stock} in stock`
-                    : "This combination is out of stock"}
-                </p>
-              )}
-            </div>
-          )}
+            ) : (
+              selected?.size && (
+                <div>
+                  <p className="eyebrow">Size</p>
+                  <p className="mt-1 text-sm">{selected.size}</p>
+                </div>
+              )
+            )}
+
+            {selected && (!needsVariant || size !== null) && (
+              <p className="text-xs text-muted-foreground">
+                {selected.stock > 0 ? `${selected.stock} in stock` : "Out of stock"}
+              </p>
+            )}
+          </div>
 
           <div className="flex flex-col gap-3 sm:flex-row">
             <Button size="lg" className="flex-1" disabled={!canAdd} onClick={addToCart}>
               {!product.in_stock
                 ? "Out of stock"
-                : needsVariant && !selected
-                  ? "Select options"
+                : needsVariant && size === null
+                  ? "Select size"
                   : canAdd
                     ? "Add to cart"
                     : "Out of stock"}
             </Button>
+
             <Button
               size="lg"
               variant="outline"
@@ -291,9 +302,10 @@ function ProductPage() {
             <TabsContent value="description" className="pt-5 text-sm leading-relaxed text-muted-foreground">
               {product.description}
             </TabsContent>
-            <TabsContent value="details" className="pt-5 text-sm leading-relaxed text-muted-foreground">
+            <TabsContent value="details" className="whitespace-pre-line pt-5 text-sm leading-relaxed text-muted-foreground">
               {product.details}
             </TabsContent>
+
             <TabsContent value="shipping" className="pt-5 text-sm leading-relaxed text-muted-foreground">
               Dispatched within 24 hours on working days. Free UK delivery over £100, £4.95
               otherwise. International shipping calculated at checkout. Unused items can be

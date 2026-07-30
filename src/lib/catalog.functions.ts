@@ -7,8 +7,11 @@ export type Variant = {
   product_id: string;
   color: string;
   fastening: string;
+  size: string | null;
+  sku: string | null;
   stock: number;
 };
+
 
 export type Product = {
   id: string;
@@ -48,7 +51,7 @@ function client() {
 }
 
 const PRODUCT_FIELDS =
-  "id, collection_id, slug, name, category, description, details, price, sale_price, images, has_variants, in_stock, featured, sort_order, collection:collections(slug, name), product_variants(id, product_id, color, fastening, stock)";
+  "id, collection_id, slug, name, category, description, details, price, sale_price, images, has_variants, in_stock, featured, sort_order, collection:collections(slug, name), product_variants(id, product_id, color, fastening, size, sku, stock)";
 
 export const getStorefront = createServerFn({ method: "GET" }).handler(async () => {
   const db = client();
