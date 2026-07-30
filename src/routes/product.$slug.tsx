@@ -302,9 +302,10 @@ function ProductPage() {
             <TabsContent value="description" className="pt-5 text-sm leading-relaxed text-muted-foreground">
               {product.description}
             </TabsContent>
-            <TabsContent value="details" className="pt-5 text-sm leading-relaxed text-muted-foreground">
+            <TabsContent value="details" className="whitespace-pre-line pt-5 text-sm leading-relaxed text-muted-foreground">
               {product.details}
             </TabsContent>
+
             <TabsContent value="shipping" className="pt-5 text-sm leading-relaxed text-muted-foreground">
               Dispatched within 24 hours on working days. Free UK delivery over £100, £4.95
               otherwise. International shipping calculated at checkout. Unused items can be
