@@ -63,6 +63,13 @@ export function Header() {
                     The Founding Collection — final run
                   </p>
                   <div className="mt-3 flex flex-col gap-3">
+                    <Link
+                      to="/collections/all"
+                      onClick={() => setMobileOpen(false)}
+                      className="font-display text-xl uppercase"
+                    >
+                      All Gloves
+                    </Link>
                     {collections.map((c) => (
                       <Link
                         key={c.slug}
@@ -127,6 +134,14 @@ export function Header() {
                 </p>
               </div>
               <DropdownMenuSeparator />
+              <DropdownMenuItem asChild>
+                <Link to="/collections/all" className="flex items-center justify-between gap-4">
+                  <span>All Gloves</span>
+                  <span className="text-[0.6rem] uppercase tracking-[0.16em] text-muted-foreground">
+                    Every pair
+                  </span>
+                </Link>
+              </DropdownMenuItem>
               {collections.map((c) => (
                 <DropdownMenuItem key={c.slug} asChild>
                   <Link

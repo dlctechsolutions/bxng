@@ -71,7 +71,7 @@ function Home() {
               variant="outline"
               className="border-foreground bg-transparent text-foreground hover:bg-foreground/10 hover:text-foreground"
             >
-              <Link to="/collections/$slug" params={{ slug: "nova" }}>
+              <Link to="/collections/all">
                 Shop now <ArrowRight className="ml-2 size-4" />
               </Link>
             </Button>
