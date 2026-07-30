@@ -124,6 +124,27 @@ export function FilterBar({
         </div>
 
         <div className="flex items-center gap-4">
+          <button
+            type="button"
+            onClick={() => setOpen((o) => !o)}
+            aria-expanded={open}
+            aria-controls={`${searchId}-filters`}
+            className={
+              "focus-flash flex h-10 items-center gap-2 border px-4 text-[0.65rem] font-bold uppercase tracking-[0.18em] transition-colors " +
+              (open || active.length
+                ? "border-foreground bg-foreground text-background"
+                : "border-border/70 bg-background text-muted-foreground hover:border-foreground/60 hover:text-foreground")
+            }
+          >
+            <SlidersHorizontal aria-hidden className="size-3.5" />
+            Filter
+            {active.length > 0 && <span>({active.length})</span>}
+            <ChevronDown
+              aria-hidden
+              className={"size-3.5 transition-transform " + (open ? "rotate-180" : "")}
+            />
+          </button>
+
           <p className="text-[0.65rem] font-bold uppercase tracking-[0.18em] text-muted-foreground">
             {count} product{count === 1 ? "" : "s"}
           </p>
@@ -140,46 +161,49 @@ export function FilterBar({
       </div>
 
       {/* filter rows */}
-      <div className="divide-y divide-border/50">
-        {groups.map((group) => (
-          <div
-            key={group.id}
-            className="flex flex-col gap-3 px-4 py-3 sm:flex-row sm:items-center sm:gap-6"
-          >
-            <span className="shrink-0 text-[0.6rem] font-bold uppercase tracking-[0.22em] text-muted-foreground sm:w-20">
-              {group.label}
-            </span>
-            <div className="flex flex-wrap items-center gap-2">
-              {group.swatches
-                ? group.options.map((o) =>
-                    o === "All" ? (
+      {open && (
+        <div id={`${searchId}-filters`} className="divide-y divide-border/50">
+          {groups.map((group) => (
+            <div
+              key={group.id}
+              className="flex flex-col gap-3 px-4 py-3 sm:flex-row sm:items-center sm:gap-6"
+            >
+              <span className="shrink-0 text-[0.6rem] font-bold uppercase tracking-[0.22em] text-muted-foreground sm:w-20">
+                {group.label}
+              </span>
+              <div className="flex flex-wrap items-center gap-2">
+                {group.swatches
+                  ? group.options.map((o) =>
+                      o === "All" ? (
+                        <Pill
+                          key={o}
+                          label="All"
+                          active={group.value === o}
+                          onClick={() => group.onChange(o)}
+                        />
+                      ) : (
+                        <Swatch
+                          key={o}
+                          label={o}
+                          active={group.value === o}
+                          onClick={() => group.onChange(o)}
+                        />
+                      ),
+                    )
+                  : group.options.map((o) => (
                       <Pill
-                        key={o}
-                        label="All"
-                        active={group.value === o}
-                        onClick={() => group.onChange(o)}
-                      />
-                    ) : (
-                      <Swatch
                         key={o}
                         label={o}
                         active={group.value === o}
                         onClick={() => group.onChange(o)}
                       />
-                    ),
-                  )
-                : group.options.map((o) => (
-                    <Pill
-                      key={o}
-                      label={o}
-                      active={group.value === o}
-                      onClick={() => group.onChange(o)}
-                    />
-                  ))}
+                    ))}
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
+
