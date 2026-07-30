@@ -4,8 +4,10 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { discountPercent, effectivePrice } from "@/lib/format";
 import { PriceTag, SaleBadge, StockBadge } from "./Price";
+import { Stars } from "./ProductReviews";
 import { useCart } from "@/lib/cart";
 import { useWishlist } from "@/lib/use-wishlist";
+import { useRating } from "@/lib/use-rating";
 import type { Product } from "@/lib/catalog.functions";
 
 export function ProductCard({
