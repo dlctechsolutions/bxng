@@ -67,9 +67,9 @@ function Home() {
             Last of the First
             <span className="block text-muted-foreground">Founding Collection</span>
           </h1>
-          <p className="mt-6 max-w-lg text-base text-muted-foreground">
-            Three tiers, one founding run — Nova, Maverick and Luxe. These are phasing out to make
-            way for the next campaign. Browse the last of the first.
+          <p className="mt-6 max-w-lg whitespace-pre-line text-base text-muted-foreground">
+            Three tiers, one founding run — Nova, Maverick and Luxe.{"\u00a0"}{"\n"}
+            These are phasing out to make way for the next campaign.
           </p>
           <div className="mt-9">
             <Button asChild size="lg">
