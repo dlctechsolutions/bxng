@@ -1,10 +1,8 @@
 import { createFileRoute, Outlet, redirect, Link } from "@tanstack/react-router";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
-import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
-import { Button } from "@/components/ui/button";
-import { amIAdmin, claimAdmin } from "@/lib/admin.functions";
+import { getMyRole } from "@/lib/roles.functions";
 
 export const Route = createFileRoute("/admin")({
   ssr: false,
@@ -37,9 +35,7 @@ const links = [
 ] as const;
 
 function AdminLayout() {
-  const check = useServerFn(amIAdmin);
-  const claim = useServerFn(claimAdmin);
-  const queryClient = useQueryClient();
+  const check = useServerFn(getMyRole);
   const { data, isLoading } = useQuery({ queryKey: ["admin", "me"], queryFn: () => check({}) });
 
   if (isLoading) {
@@ -52,27 +48,14 @@ function AdminLayout() {
         <p className="eyebrow">Restricted</p>
         <h1 className="mt-4 text-[clamp(2rem,5vw,3rem)]">Admin access required</h1>
         <p className="mt-4 text-sm text-muted-foreground">
-          This account isn't an administrator. If this is a brand new store and no admin exists yet, you can
-          claim ownership once.
+          This account is a customer account and can't access the admin console.
         </p>
-        <Button
-          className="mt-8"
-          onClick={async () => {
-            try {
-              const res = await claim({});
-              if (res.claimed) {
-                toast.success("Admin access granted.");
-                await queryClient.invalidateQueries({ queryKey: ["admin"] });
-              } else {
-                toast.error("An admin already exists — ask them to grant you access.");
-              }
-            } catch {
-              toast.error("Could not claim admin access.");
-            }
-          }}
+        <Link
+          to="/account"
+          className="mt-8 inline-block border border-foreground px-6 py-3 text-[0.65rem] font-bold uppercase tracking-[0.2em] transition-colors hover:bg-foreground hover:text-background"
         >
-          Claim admin access
-        </Button>
+          Go to my account
+        </Link>
       </section>
     );
   }
