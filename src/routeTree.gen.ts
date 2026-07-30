@@ -30,6 +30,7 @@ import { Route as AdminCollectionsRouteImport } from './routes/admin.collections
 import { Route as AuthenticatedAccountIndexRouteImport } from './routes/_authenticated/account.index'
 import { Route as AuthenticatedAccountOrdersRouteImport } from './routes/_authenticated/account.orders'
 import { Route as AuthenticatedAccountDetailsRouteImport } from './routes/_authenticated/account.details'
+import { Route as ApiPublicProductImageSplatRouteImport } from './routes/api/public/product-image/$'
 
 const WishlistRoute = WishlistRouteImport.update({
   id: '/wishlist',
@@ -138,6 +139,12 @@ const AuthenticatedAccountDetailsRoute =
     path: '/account/details',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const ApiPublicProductImageSplatRoute =
+  ApiPublicProductImageSplatRouteImport.update({
+    id: '/api/public/product-image/$',
+    path: '/api/public/product-image/$',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -160,6 +167,7 @@ export interface FileRoutesByFullPath {
   '/account/details': typeof AuthenticatedAccountDetailsRoute
   '/account/orders': typeof AuthenticatedAccountOrdersRoute
   '/account/': typeof AuthenticatedAccountIndexRoute
+  '/api/public/product-image/$': typeof ApiPublicProductImageSplatRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -181,6 +189,7 @@ export interface FileRoutesByTo {
   '/account/details': typeof AuthenticatedAccountDetailsRoute
   '/account/orders': typeof AuthenticatedAccountOrdersRoute
   '/account': typeof AuthenticatedAccountIndexRoute
+  '/api/public/product-image/$': typeof ApiPublicProductImageSplatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -205,6 +214,7 @@ export interface FileRoutesById {
   '/_authenticated/account/details': typeof AuthenticatedAccountDetailsRoute
   '/_authenticated/account/orders': typeof AuthenticatedAccountOrdersRoute
   '/_authenticated/account/': typeof AuthenticatedAccountIndexRoute
+  '/api/public/product-image/$': typeof ApiPublicProductImageSplatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -229,6 +239,7 @@ export interface FileRouteTypes {
     | '/account/details'
     | '/account/orders'
     | '/account/'
+    | '/api/public/product-image/$'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -250,6 +261,7 @@ export interface FileRouteTypes {
     | '/account/details'
     | '/account/orders'
     | '/account'
+    | '/api/public/product-image/$'
   id:
     | '__root__'
     | '/'
@@ -273,6 +285,7 @@ export interface FileRouteTypes {
     | '/_authenticated/account/details'
     | '/_authenticated/account/orders'
     | '/_authenticated/account/'
+    | '/api/public/product-image/$'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -288,6 +301,7 @@ export interface RootRouteChildren {
   CollectionsSlugRoute: typeof CollectionsSlugRoute
   CollectionsAllRoute: typeof CollectionsAllRoute
   ProductSlugRoute: typeof ProductSlugRoute
+  ApiPublicProductImageSplatRoute: typeof ApiPublicProductImageSplatRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -439,6 +453,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAccountDetailsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/api/public/product-image/$': {
+      id: '/api/public/product-image/$'
+      path: '/api/public/product-image/$'
+      fullPath: '/api/public/product-image/$'
+      preLoaderRoute: typeof ApiPublicProductImageSplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -490,6 +511,7 @@ const rootRouteChildren: RootRouteChildren = {
   CollectionsSlugRoute: CollectionsSlugRoute,
   CollectionsAllRoute: CollectionsAllRoute,
   ProductSlugRoute: ProductSlugRoute,
+  ApiPublicProductImageSplatRoute: ApiPublicProductImageSplatRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
