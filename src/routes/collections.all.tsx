@@ -36,6 +36,7 @@ function AllGlovesPage() {
   const { data } = useSuspenseQuery(storefrontQuery);
   const [range, setRange] = useState("All");
   const [category, setCategory] = useState("All");
+  const [color, setColor] = useState("All");
   const [query, setQuery] = useState("");
 
   const ranges = ["All", ...data.collections.map((c) => c.name)];
@@ -43,11 +44,13 @@ function AllGlovesPage() {
     "All",
     ...Array.from(new Set(data.products.map((p) => p.category))),
   ];
+  const colors = ["All", ...allColors(data.products)];
 
   const q = query.trim().toLowerCase();
   const products = data.products
     .filter((p) => range === "All" || p.collection?.name === range)
     .filter((p) => category === "All" || p.category === category)
+    .filter((p) => color === "All" || productColors(p).includes(color))
     .filter(
       (p) =>
         !q ||
@@ -61,6 +64,7 @@ function AllGlovesPage() {
     label: string,
     active: boolean,
     onClick: () => void,
+    swatch?: string,
   ) => (
     <button
       key={label}
@@ -68,15 +72,23 @@ function AllGlovesPage() {
       onClick={onClick}
       aria-pressed={active}
       className={
-        "border px-4 py-2 text-[0.65rem] font-bold uppercase tracking-[0.18em] transition-colors focus-flash " +
+        "flex items-center gap-2 border px-4 py-2 text-[0.65rem] font-bold uppercase tracking-[0.18em] transition-colors focus-flash " +
         (active
           ? "border-foreground bg-foreground text-background"
           : "border-border text-muted-foreground hover:border-foreground hover:text-foreground")
       }
     >
+      {swatch && (
+        <span
+          aria-hidden
+          className="size-3 rounded-full border border-border/60"
+          style={{ backgroundColor: swatch }}
+        />
+      )}
       {label}
     </button>
   );
+
 
   return (
     <>
