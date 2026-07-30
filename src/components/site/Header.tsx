@@ -17,9 +17,9 @@ import { money } from "@/lib/format";
 import { supabase } from "@/integrations/supabase/client";
 
 const collections = [
-  { slug: "luxe", label: "Luxe Collection" },
-  { slug: "maverick", label: "Maverick Collection" },
-  { slug: "nova", label: "Nova Collection" },
+  { slug: "nova", label: "Nova — Original", tier: "Tier I" },
+  { slug: "maverick", label: "Maverick — Mid Range", tier: "Tier II" },
+  { slug: "luxe", label: "Luxe — Premium", tier: "Tier III" },
 ];
 
 export function Header() {
@@ -58,7 +58,10 @@ export function Header() {
                   The 44 Story
                 </Link>
                 <div>
-                  <p className="eyebrow">Boxing Gloves</p>
+                  <p className="eyebrow">The Last of the First</p>
+                  <p className="mt-1 text-[0.65rem] uppercase tracking-[0.16em] text-muted-foreground">
+                    The Founding Collection — final run
+                  </p>
                   <div className="mt-3 flex flex-col gap-3">
                     {collections.map((c) => (
                       <Link
@@ -113,15 +116,28 @@ export function Header() {
           </Link>
           <DropdownMenu>
             <DropdownMenuTrigger className="nav-link flex items-center gap-1.5 text-[0.7rem] font-bold uppercase tracking-[0.22em] outline-none data-[state=open]:text-accent [&[data-state=open]_svg]:rotate-180">
-              Boxing Gloves{" "}
+              The Last of the First{" "}
               <ChevronDown className="size-3.5 transition-transform duration-300" />
             </DropdownMenuTrigger>
 
-            <DropdownMenuContent align="center" className="border-border bg-popover">
+            <DropdownMenuContent align="center" className="w-72 border-border bg-popover">
+              <div className="px-2 py-2">
+                <p className="text-[0.6rem] font-bold uppercase tracking-[0.2em] text-muted-foreground">
+                  The Founding Collection — final run
+                </p>
+              </div>
+              <DropdownMenuSeparator />
               {collections.map((c) => (
                 <DropdownMenuItem key={c.slug} asChild>
-                  <Link to="/collections/$slug" params={{ slug: c.slug }}>
-                    {c.label}
+                  <Link
+                    to="/collections/$slug"
+                    params={{ slug: c.slug }}
+                    className="flex items-center justify-between gap-4"
+                  >
+                    <span>{c.label}</span>
+                    <span className="text-[0.6rem] uppercase tracking-[0.16em] text-muted-foreground">
+                      {c.tier}
+                    </span>
                   </Link>
                 </DropdownMenuItem>
               ))}
