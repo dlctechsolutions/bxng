@@ -1,11 +1,15 @@
 import { createFileRoute, Outlet, redirect, Link } from "@tanstack/react-router";
 import { supabase } from "@/integrations/supabase/client";
+import { getMyRole } from "@/lib/roles.functions";
 
 export const Route = createFileRoute("/_authenticated")({
   ssr: false,
   beforeLoad: async () => {
     const { data, error } = await supabase.auth.getUser();
     if (error || !data.user) throw redirect({ to: "/auth" });
+    // Admins run the store, not a shopper account — send them to their console.
+    const role = await getMyRole({});
+    if (role.isAdmin) throw redirect({ to: "/admin" });
     return { user: data.user };
   },
   component: AccountLayout,
