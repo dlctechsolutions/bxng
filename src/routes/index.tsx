@@ -73,14 +73,25 @@ function Home() {
             <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-muted-foreground">
               Scroll to explore
             </p>
-            <ArrowDown className="size-5 animate-bounce text-accent" />
+            <button
+              type="button"
+              aria-label="Scroll to the founding collection"
+              onClick={() =>
+                document
+                  .getElementById("tier-explainer")
+                  ?.scrollIntoView({ behavior: "smooth", block: "start" })
+              }
+              className="icon-action focus-flash p-2"
+            >
+              <ArrowDown className="size-5 animate-bounce text-accent" />
+            </button>
           </div>
         </div>
 
       </section>
 
       {/* Tier explainer */}
-      <section className="shell pt-20 md:pt-28">
+      <section id="tier-explainer" className="shell scroll-mt-24 pt-20 md:pt-28">
         <div className="border-b border-border pb-6">
           <p className="eyebrow">One Collection, Three Tiers</p>
           <h2 className="mt-3 max-w-3xl text-[clamp(1.75rem,4vw,3rem)]">
