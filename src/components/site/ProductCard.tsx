@@ -87,6 +87,18 @@ export function ProductCard({
             </Link>
           </h3>
         </div>
+        {rating && rating.count > 0 && (
+          <Link
+            to="/product/$slug"
+            params={{ slug: product.slug }}
+            className="inline-flex items-center gap-2 text-[0.7rem] text-muted-foreground transition-colors hover:text-foreground"
+          >
+            <Stars value={rating.average} />
+            <span>
+              {rating.average.toFixed(1)} ({rating.count})
+            </span>
+          </Link>
+        )}
         <PriceTag price={product.price} salePrice={product.sale_price} size="sm" />
         <div className="mt-auto">
           {soldOut ? (
