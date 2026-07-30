@@ -246,24 +246,24 @@ function ProductPage() {
               )
             )}
 
-            {selected && (
+            {selected && (!needsVariant || size !== null) && (
               <p className="text-xs text-muted-foreground">
                 {selected.stock > 0 ? `${selected.stock} in stock` : "Out of stock"}
               </p>
             )}
           </div>
 
-
           <div className="flex flex-col gap-3 sm:flex-row">
             <Button size="lg" className="flex-1" disabled={!canAdd} onClick={addToCart}>
               {!product.in_stock
                 ? "Out of stock"
-                : needsVariant && !selected
-                  ? "Select options"
+                : needsVariant && size === null
+                  ? "Select size"
                   : canAdd
                     ? "Add to cart"
                     : "Out of stock"}
             </Button>
+
             <Button
               size="lg"
               variant="outline"
