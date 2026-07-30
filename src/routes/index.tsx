@@ -41,9 +41,12 @@ export const Route = createFileRoute("/")({
 
 function Home() {
   const { data } = useSuspenseQuery(storefrontQuery);
+  const featuredFirst = (list: typeof data.products) =>
+    [...list].sort((a, b) => Number(b.featured) - Number(a.featured));
   const byCollection = (slug: string) =>
-    data.products.filter((p) => p.collection?.slug === slug);
+    featuredFirst(data.products.filter((p) => p.collection?.slug === slug));
 
+  const selected = data.products.filter((p) => p.featured).slice(0, 4);
   const luxe = byCollection("luxe").slice(0, 3);
   const maverick = byCollection("maverick").slice(0, 10);
   const nova = byCollection("nova").slice(0, 3);
