@@ -63,17 +63,17 @@ function Home() {
         <div className="pointer-events-none absolute inset-0 editorial-overlay" />
         <div className="pointer-events-none absolute inset-0 scrim-left" />
         <div className="pointer-events-none absolute inset-0 vignette" />
-        <div className="shell relative flex min-h-[78vh] flex-col justify-end pt-28 pb-16 md:min-h-[86vh] md:pt-40 md:pb-24">
-          <div className="flex flex-col items-start gap-6">
+        <div className="shell relative flex min-h-[78vh] flex-col items-center justify-center py-24 text-center md:min-h-[86vh]">
+          <div className="flex flex-col items-center gap-6">
             <Button asChild size="lg">
               <Link to="/collections/$slug" params={{ slug: "nova" }}>
                 Shop now <ArrowRight className="ml-2 size-4" />
               </Link>
             </Button>
-            <p className="flex items-center gap-3 text-[0.65rem] font-bold uppercase tracking-[0.2em] text-muted-foreground">
+            <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-muted-foreground">
               Scroll to explore
-              <ArrowDown className="size-4 animate-bounce text-accent" />
             </p>
+            <ArrowDown className="size-5 animate-bounce text-accent" />
           </div>
         </div>
 
