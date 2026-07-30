@@ -145,17 +145,10 @@ function CollectionPage() {
               <p className="text-sm text-muted-foreground">
                 No products match your search.
               </p>
-              <Button
-                variant="outline"
-                className="mt-6"
-                onClick={() => {
-                  setQuery("");
-                  setCategory("All");
-                  setColor("All");
-                }}
-              >
+              <Button variant="outline" className="mt-6" onClick={clearAll}>
                 Clear filters
               </Button>
+
             </div>
           ) : (
             <ProductGrid products={products} columns={4} />
