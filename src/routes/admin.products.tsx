@@ -399,6 +399,10 @@ function AdminProducts() {
                 <Input id="new-fastening" placeholder="Velcro" />
               </div>
               <div className="w-24">
+                <Label>Size</Label>
+                <Input id="new-size" placeholder="12oz" />
+              </div>
+              <div className="w-24">
                 <Label>Stock</Label>
                 <Input id="new-stock" type="number" defaultValue={0} />
               </div>
@@ -407,14 +411,16 @@ function AdminProducts() {
                 onClick={() => {
                   const color = (document.getElementById("new-color") as HTMLInputElement).value;
                   const fastening = (document.getElementById("new-fastening") as HTMLInputElement).value;
+                  const size = (document.getElementById("new-size") as HTMLInputElement).value || null;
                   const stock = Number((document.getElementById("new-stock") as HTMLInputElement).value);
                   if (!color || !fastening) {
                     toast.error("Colour and fastening are required");
                     return;
                   }
-                  variantSave.mutate({ product_id: variantsFor.id, color, fastening, stock });
+                  variantSave.mutate({ product_id: variantsFor.id, color, fastening, size, stock });
                 }}
               >
+
                 Add
               </Button>
             </div>
