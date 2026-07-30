@@ -5,9 +5,9 @@ import { NewsletterSignup } from "./NewsletterSignup";
 
 const links = [
   { to: "/the-44-story", label: "The 44 Story" },
-  { to: "/collections/$slug", params: { slug: "luxe" }, label: "Luxe Collection" },
-  { to: "/collections/$slug", params: { slug: "maverick" }, label: "Maverick Collection" },
-  { to: "/collections/$slug", params: { slug: "nova" }, label: "Nova Collection" },
+  { to: "/collections/$slug", params: { slug: "nova" }, label: "Nova — Tier I" },
+  { to: "/collections/$slug", params: { slug: "maverick" }, label: "Maverick — Tier II" },
+  { to: "/collections/$slug", params: { slug: "luxe" }, label: "Luxe — Tier III" },
   { to: "/wishlist", label: "Wishlist" },
   { to: "/orders", label: "Orders" },
   { to: "/account-details", label: "Account Details" },
