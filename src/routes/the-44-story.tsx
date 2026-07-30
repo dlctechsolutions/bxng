@@ -117,6 +117,9 @@ function StoryPage() {
               Shop Nova
             </Link>
           </Button>
+          <Button asChild size="lg" variant="outline">
+            <Link to="/collections/all">Shop All</Link>
+          </Button>
         </div>
       </section>
     </>
