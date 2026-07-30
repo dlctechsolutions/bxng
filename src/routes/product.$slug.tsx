@@ -50,8 +50,8 @@ function ProductPage() {
   const cart = useCart();
   const wishlist = useWishlist();
   const [activeImage, setActiveImage] = useState(0);
-  const [color, setColor] = useState<string | null>(null);
-  const [fastening, setFastening] = useState<string | null>(null);
+  const [size, setSize] = useState<string | null>(null);
+
 
   const product = data?.product;
   const fetchReviews = useServerFn(getProductReviews);
@@ -65,14 +65,19 @@ function ProductPage() {
     count: reviewsQuery.data?.count ?? 0,
   };
   const variants = useMemo(() => product?.product_variants ?? [], [product]);
-  const colors = useMemo(
-    () => Array.from(new Set(variants.map((v) => v.color))),
+  const sizes = useMemo(
+    () => Array.from(new Set(variants.map((v) => v.size).filter(Boolean) as string[])),
     [variants],
   );
-  const fastenings = useMemo(
-    () => Array.from(new Set(variants.map((v) => v.fastening))),
+  const colourLabel = useMemo(
+    () => Array.from(new Set(variants.map((v) => v.color))).join(" / "),
     [variants],
   );
+  const fasteningLabel = useMemo(
+    () => Array.from(new Set(variants.map((v) => v.fastening))).join(" / "),
+    [variants],
+  );
+
 
   if (!product) {
     return (
@@ -88,12 +93,12 @@ function ProductPage() {
   const price = effectivePrice(product.price, product.sale_price);
   const off = discountPercent(product.price, product.sale_price);
   const images = product.images?.length ? product.images : ["/images/prod-luxe-onyx.jpg"];
-  const selected = variants.find((v) => v.color === color && v.fastening === fastening) ?? null;
-  const stockFor = (c: string, f: string) =>
-    variants.find((v) => v.color === c && v.fastening === f)?.stock ?? 0;
-  const needsVariant = product.has_variants;
+  const selected =
+    (size !== null ? variants.find((v) => v.size === size) : variants[0]) ?? null;
+  const stockForSize = (s: string) => variants.find((v) => v.size === s)?.stock ?? 0;
+  const needsVariant = product.has_variants && sizes.length > 1;
   const canAdd =
-    product.in_stock && (!needsVariant || (selected !== null && selected.stock > 0));
+    product.in_stock && (!needsVariant || (size !== null && (selected?.stock ?? 0) > 0));
 
   function addToCart() {
     if (!canAdd) return;
@@ -102,7 +107,10 @@ function ProductPage() {
       variantId: selected?.id ?? null,
       slug: product!.slug,
       name: product!.name,
-      variantLabel: selected ? `${selected.color} · ${selected.fastening}` : null,
+      variantLabel: selected
+        ? [selected.size, selected.color, selected.fastening].filter(Boolean).join(" · ")
+        : null,
+
       image: images[0],
       unitPrice: price,
     });

@@ -219,6 +219,8 @@ export type Database = {
           fastening: string
           id: string
           product_id: string
+          size: string | null
+          sku: string | null
           stock: number
         }
         Insert: {
@@ -227,6 +229,8 @@ export type Database = {
           fastening?: string
           id?: string
           product_id: string
+          size?: string | null
+          sku?: string | null
           stock?: number
         }
         Update: {
@@ -235,6 +239,8 @@ export type Database = {
           fastening?: string
           id?: string
           product_id?: string
+          size?: string | null
+          sku?: string | null
           stock?: number
         }
         Relationships: [
