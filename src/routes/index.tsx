@@ -173,6 +173,7 @@ function Home() {
         copy="The premium tier, and the final word on the founding collection. Full-grain leather, hand-stitched, built to outlast the campaign."
         slug="luxe"
         align="left"
+        imageClassName="object-[center_30%] md:object-[center_25%]"
       />
 
       <section className="shell">
@@ -271,6 +272,7 @@ function RangeBanner({
   copy,
   slug,
   align,
+  imageClassName,
 }: {
   image: string;
   eyebrow: string;
@@ -278,6 +280,7 @@ function RangeBanner({
   copy: string;
   slug: string;
   align: "left" | "right";
+  imageClassName?: string;
 }) {
   return (
     <section className="relative isolate mt-28 mb-16 overflow-hidden">
@@ -287,7 +290,7 @@ function RangeBanner({
         loading="lazy"
         width={1600}
         height={900}
-        className="h-[26rem] w-full object-cover md:h-[34rem]"
+        className={cn("h-[26rem] w-full object-cover md:h-[34rem]", imageClassName)}
       />
       <div className="pointer-events-none absolute inset-0 bg-background/35" />
       <div
