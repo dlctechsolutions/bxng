@@ -189,6 +189,7 @@ function AllGlovesPage() {
                   setQuery("");
                   setCategory("All");
                   setRange("All");
+                  setColor("All");
                 }}
               >
                 Clear filters
