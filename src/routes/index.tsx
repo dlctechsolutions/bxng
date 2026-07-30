@@ -64,8 +64,8 @@ function Home() {
         <div className="shell relative flex min-h-[78vh] flex-col justify-end pt-28 pb-16 md:min-h-[86vh] md:pt-40 md:pb-24">
           <p className="eyebrow">The Founding Collection — Final Run</p>
           <h1 className="mt-5 max-w-4xl text-[clamp(2.75rem,8vw,6.5rem)]">
-            The Last of the First
-            <span className="block text-muted-foreground">The Founding Collection</span>
+            Last of the First
+            <span className="block text-muted-foreground">Founding Collection</span>
           </h1>
           <p className="mt-6 max-w-lg text-base text-muted-foreground">
             Three tiers, one founding run — Nova, Maverick and Luxe. These are phasing out to make
