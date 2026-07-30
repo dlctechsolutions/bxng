@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useSuspenseQuery, queryOptions } from "@tanstack/react-query";
 import { ArrowRight, Check } from "@/components/site/icons";
+import { ArrowDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ProductGrid } from "@/components/site/ProductGrid";
 import { getStorefront } from "@/lib/catalog.functions";
@@ -63,23 +64,19 @@ function Home() {
         <div className="pointer-events-none absolute inset-0 scrim-left" />
         <div className="pointer-events-none absolute inset-0 vignette" />
         <div className="shell relative flex min-h-[78vh] flex-col justify-end pt-28 pb-16 md:min-h-[86vh] md:pt-40 md:pb-24">
-          <p className="eyebrow uppercase">The Founding Collection</p>
-          <h1 className="mt-5 max-w-4xl text-[clamp(2.75rem,8vw,6.5rem)]">
-            Last of the First
-            <span className="block text-muted-foreground">Founding Collection</span>
-          </h1>
-          <p className="mt-6 max-w-lg text-base text-muted-foreground">
-            Three tiers, one founding run — Nova, Maverick and Luxe.{"\u00a0"}These are phasing out to
-            make way for the next campaign.
-          </p>
-          <div className="mt-9">
+          <div className="flex flex-col items-start gap-6">
             <Button asChild size="lg">
               <Link to="/collections/$slug" params={{ slug: "nova" }}>
-                Explore all boxing gloves <ArrowRight className="ml-2 size-4" />
+                Shop now <ArrowRight className="ml-2 size-4" />
               </Link>
             </Button>
+            <p className="flex items-center gap-3 text-[0.65rem] font-bold uppercase tracking-[0.2em] text-muted-foreground">
+              Scroll to explore
+              <ArrowDown className="size-4 animate-bounce text-accent" />
+            </p>
           </div>
         </div>
+
       </section>
 
       {/* Tier explainer */}
