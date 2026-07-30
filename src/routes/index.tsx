@@ -202,12 +202,19 @@ function Home() {
                 Driven by discipline
               </h2>
             </div>
-            <p className="max-w-lg text-base leading-relaxed text-muted-foreground">
-              44 Boxing started in a cold gym at 4am with one problem: the gloves that felt right
-              cost too much, and the gloves that were affordable fell apart. So we built our own —
-              top quality, affordable boxing gloves, made for the people who show up when nobody
-              is watching.
-            </p>
+            <div className="max-w-lg space-y-5 text-base leading-relaxed text-muted-foreground">
+              <p>
+                At 44BXNG, we believe top-quality boxing gloves shouldn’t cost a fortune. Founded by
+                a former boxer turned coach, we set out to create gear that’s built to perform, look
+                good, and stay affordable - because boxing’s for everyone.
+              </p>
+              <p>
+                We know the sport inside out. It’s about discipline, not just power. But great
+                gloves were either overpriced or underwhelming - so we changed that. Our designs
+                take inspiration from timeless styles, and we focus on the details. Clean looks,
+                quality materials, and minimal branding for maximum impact.
+              </p>
+            </div>
             <ul className="space-y-4">
               {[
                 "Driven by Discipline",
