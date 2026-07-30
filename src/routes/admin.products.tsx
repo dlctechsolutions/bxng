@@ -360,6 +360,10 @@ function AdminProducts() {
                     <Input defaultValue={v.fastening} id={`f-${v.id}`} />
                   </div>
                   <div className="w-24">
+                    <Label>Size</Label>
+                    <Input defaultValue={v.size ?? ""} id={`z-${v.id}`} />
+                  </div>
+                  <div className="w-24">
                     <Label>Stock</Label>
                     <Input type="number" defaultValue={v.stock} id={`s-${v.id}`} />
                   </div>
@@ -371,6 +375,8 @@ function AdminProducts() {
                         product_id: v.product_id,
                         color: (document.getElementById(`c-${v.id}`) as HTMLInputElement).value,
                         fastening: (document.getElementById(`f-${v.id}`) as HTMLInputElement).value,
+                        size:
+                          (document.getElementById(`z-${v.id}`) as HTMLInputElement).value || null,
                         stock: Number((document.getElementById(`s-${v.id}`) as HTMLInputElement).value),
                       })
                     }
@@ -381,6 +387,7 @@ function AdminProducts() {
                     Remove
                   </Button>
                 </div>
+
               ))}
             <div className="flex flex-wrap items-end gap-2 border border-dashed border-border p-3">
               <div className="flex-1">
