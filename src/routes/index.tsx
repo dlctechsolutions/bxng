@@ -14,17 +14,20 @@ const storefrontQuery = queryOptions({
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "44 Boxing — Founding Collection, Last of the First" },
+      { title: "44 Boxing — The Last of the First: The Founding Collection" },
       {
         name: "description",
         content:
-          "Premium boxing gloves built for those that never settle. Shop the Luxe, Maverick and Nova collections while the founding run lasts.",
+          "The Founding Collection is phasing out. Shop the final run of Nova (original), Maverick (mid range) and Luxe (premium) before the next campaign lands.",
       },
-      { property: "og:title", content: "44 Boxing — Founding Collection, Last of the First" },
+      { property: "og:title", content: "44 Boxing — The Last of the First: The Founding Collection" },
       {
         property: "og:description",
-        content: "Premium boxing gloves built for those that never settle. Shop the Luxe, Maverick and Nova collections while the founding run lasts.",
+        content:
+          "The Founding Collection is phasing out. Shop the final run of Nova (original), Maverick (mid range) and Luxe (premium) before the next campaign lands.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   loader: ({ context }) => {
