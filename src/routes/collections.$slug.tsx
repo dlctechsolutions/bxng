@@ -100,8 +100,15 @@ function CollectionPage() {
         <div className="pointer-events-none absolute inset-0 editorial-overlay" />
         <div className="pointer-events-none absolute inset-0 vignette" />
         <div className="shell absolute inset-0 flex flex-col justify-end pb-12">
-          <p className="eyebrow">{collection.tagline}</p>
-          <h1 className="mt-4 text-[clamp(2.25rem,6vw,4.5rem)]">{collection.name}</h1>
+          <p className="eyebrow">The Last of the First — The Founding Collection</p>
+          <h1 className="mt-4 text-[clamp(2.25rem,6vw,4.5rem)]">
+            {collection.name}
+            {TIERS[slug] && (
+              <span className="mt-3 block text-[0.65rem] font-bold uppercase tracking-[0.22em] text-muted-foreground">
+                {TIERS[slug]}
+              </span>
+            )}
+          </h1>
           <p className="mt-4 max-w-xl text-sm text-muted-foreground">{collection.description}</p>
         </div>
       </section>
