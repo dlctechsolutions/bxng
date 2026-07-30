@@ -307,7 +307,13 @@ function AdminProducts() {
                 />
               </div>
               <div className="flex items-center justify-between border border-border p-3">
-                <span className="text-sm">Featured</span>
+                <span className="text-sm">
+                  Featured
+                  <span className="mt-1 block text-xs text-muted-foreground">
+                    Shows in “Selected by 44” on the homepage, leads its tier grid, and gets a
+                    “Selected” badge on the card.
+                  </span>
+                </span>
                 <Switch
                   checked={editing.featured}
                   onCheckedChange={(v) => setEditing({ ...editing, featured: v })}
