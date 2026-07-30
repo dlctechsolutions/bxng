@@ -74,9 +74,10 @@ function Swatch({
     >
       <span
         aria-hidden
-        className="size-4 rounded-full border border-border/60"
+        className="size-4 rounded-full border border-foreground/70"
         style={{ backgroundColor: COLOR_SWATCHES[label] ?? "transparent" }}
       />
+
     </button>
   );
 }
