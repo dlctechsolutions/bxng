@@ -141,7 +141,7 @@ function Home() {
       </section>
 
       <RangeBanner
-        image="/images/banner-nova.jpg"
+        image={novaBanner.url}
         eyebrow="Tier I — Nova"
         title="Where It Started"
         copy="The original range of the founding collection. Lightweight, responsive and low-profile — made for speed and the rounds that decide it."
