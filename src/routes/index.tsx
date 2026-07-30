@@ -65,9 +65,15 @@ function Home() {
         <div className="shell relative flex min-h-[78vh] flex-col justify-end pt-28 pb-16 md:min-h-[86vh] md:pt-40 md:pb-24">
           <p className="eyebrow uppercase">The Founding Collection</p>
           <h1 className="mt-5 max-w-5xl text-[clamp(2.75rem,8vw,6.5rem)]">
-            <span className="block md:whitespace-nowrap">Last of the First</span>
-            <span className="block text-[0.55em] text-muted-foreground">Founding Collection</span>
+            <span className="block whitespace-nowrap text-[0.42em] text-muted-foreground">
+              Last of the First
+            </span>
+            <span className="mt-2 block leading-[0.95]">
+              Founding
+              <span className="block">Collection</span>
+            </span>
           </h1>
+
 
 
           <p className="mt-6 max-w-lg text-base text-muted-foreground">
