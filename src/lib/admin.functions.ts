@@ -22,27 +22,6 @@ export const amIAdmin = createServerFn({ method: "GET" })
     return { isAdmin: await isAdminUser(context) };
   });
 
-/** Only succeeds while no admin exists yet. */
-export const claimAdmin = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
-  .handler(async ({ context }) => {
-    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-    const { data: existing, error: existingError } = await supabaseAdmin
-      .from("user_roles")
-      .select("user_id")
-      .eq("role", "admin")
-      .limit(1);
-    if (existingError) throw existingError;
-    if (existing && existing.length > 0) return { claimed: false };
-
-    const { error } = await supabaseAdmin
-      .from("user_roles")
-      .insert({ user_id: context.userId, role: "admin" });
-    if (error) throw error;
-    return { claimed: true };
-  });
-
-
 export const getAdminOverview = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {

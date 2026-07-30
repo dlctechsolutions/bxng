@@ -4,7 +4,6 @@ import { useServerFn } from "@tanstack/react-start";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/lib/use-auth";
-import { amIAdmin } from "@/lib/admin.functions";
 
 export const Route = createFileRoute("/_authenticated/account/")({
   head: () => ({
@@ -22,8 +21,6 @@ function AccountOverview() {
   const { user } = useAuth();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const checkAdmin = useServerFn(amIAdmin);
-  const admin = useQuery({ queryKey: ["admin", "me"], queryFn: () => checkAdmin({}) });
 
   async function signOut() {
     await queryClient.cancelQueries();
