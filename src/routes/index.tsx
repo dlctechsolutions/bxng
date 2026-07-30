@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { ProductGrid } from "@/components/site/ProductGrid";
 import { getStorefront } from "@/lib/catalog.functions";
 import { cn } from "@/lib/utils";
+import luxeBanner from "@/assets/luxe-banner.jpg.asset.json";
 
 const storefrontQuery = queryOptions({
   queryKey: ["storefront"],
@@ -166,7 +167,7 @@ function Home() {
       </section>
 
       <RangeBanner
-        image="/images/banner-luxe.jpg"
+        image={luxeBanner.url}
         eyebrow="Tier III — Luxe"
         title="The Last Of The First"
         copy="The premium tier, and the final word on the founding collection. Full-grain leather, hand-stitched, built to outlast the campaign."
