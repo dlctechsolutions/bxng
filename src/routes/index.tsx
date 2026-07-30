@@ -6,6 +6,7 @@ import { ProductGrid } from "@/components/site/ProductGrid";
 import { getStorefront } from "@/lib/catalog.functions";
 import { cn } from "@/lib/utils";
 import luxeBanner from "@/assets/luxe-banner.jpg.asset.json";
+import novaBanner from "@/assets/nova-banner.jpg.asset.json";
 
 const storefrontQuery = queryOptions({
   queryKey: ["storefront"],
