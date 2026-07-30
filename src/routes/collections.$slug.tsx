@@ -1,11 +1,12 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useSuspenseQuery, queryOptions } from "@tanstack/react-query";
 import { useState } from "react";
-import { Search, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ProductGrid } from "@/components/site/ProductGrid";
+import { FilterBar } from "@/components/site/FilterBar";
 import { getStorefront } from "@/lib/catalog.functions";
-import { allColors, productColors, COLOR_SWATCHES } from "@/lib/product-colors";
+import { allColors, productColors } from "@/lib/product-colors";
+
 
 const storefrontQuery = queryOptions({
   queryKey: ["storefront"],
