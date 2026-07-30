@@ -90,8 +90,10 @@ export function FilterBar({
   count,
   onClear,
 }: Props) {
+  const [open, setOpen] = useState(false);
   const active = groups.filter((g) => g.value !== "All");
   const hasFilters = active.length > 0 || query.trim().length > 0;
+
 
   return (
     <div className="border border-border/70 bg-card/40">
