@@ -215,6 +215,7 @@ function CollectionPage() {
                 onClick={() => {
                   setQuery("");
                   setCategory("All");
+                  setColor("All");
                 }}
               >
                 Clear filters
