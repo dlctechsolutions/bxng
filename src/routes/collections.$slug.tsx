@@ -68,6 +68,7 @@ function CollectionPage() {
   const { slug } = Route.useParams();
   const { data } = useSuspenseQuery(storefrontQuery);
   const [category, setCategory] = useState<string>("All");
+  const [color, setColor] = useState<string>("All");
   const [query, setQuery] = useState("");
 
   const collection = data.collections.find((c) => c.slug === slug);
@@ -75,9 +76,11 @@ function CollectionPage() {
 
   const all = data.products.filter((p) => p.collection_id === collection.id);
   const categories = ["All", ...Array.from(new Set(all.map((p) => p.category)))];
+  const colors = ["All", ...allColors(all)];
   const q = query.trim().toLowerCase();
   const products = all
     .filter((p) => category === "All" || p.category === category)
+    .filter((p) => color === "All" || productColors(p).includes(color))
     .filter(
       (p) =>
         !q ||
@@ -85,6 +88,7 @@ function CollectionPage() {
         p.category.toLowerCase().includes(q) ||
         (p.description ?? "").toLowerCase().includes(q),
     );
+
 
   return (
     <>
