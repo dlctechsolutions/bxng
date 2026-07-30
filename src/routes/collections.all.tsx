@@ -129,7 +129,19 @@ function AllGlovesPage() {
                   filterButton(c, category === c, () => setCategory(c)),
                 )}
               </div>
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="eyebrow mr-3">Colour</span>
+                {colors.map((c) =>
+                  filterButton(
+                    c,
+                    color === c,
+                    () => setColor(c),
+                    c === "All" ? undefined : COLOR_SWATCHES[c],
+                  ),
+                )}
+              </div>
             </div>
+
 
             <div className="relative w-full lg:max-w-xs">
               <Search
