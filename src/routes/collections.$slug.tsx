@@ -5,6 +5,7 @@ import { Search, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ProductGrid } from "@/components/site/ProductGrid";
 import { getStorefront } from "@/lib/catalog.functions";
+import { allColors, productColors, COLOR_SWATCHES } from "@/lib/product-colors";
 
 const storefrontQuery = queryOptions({
   queryKey: ["storefront"],
@@ -68,6 +69,7 @@ function CollectionPage() {
   const { slug } = Route.useParams();
   const { data } = useSuspenseQuery(storefrontQuery);
   const [category, setCategory] = useState<string>("All");
+  const [color, setColor] = useState<string>("All");
   const [query, setQuery] = useState("");
 
   const collection = data.collections.find((c) => c.slug === slug);
@@ -75,9 +77,11 @@ function CollectionPage() {
 
   const all = data.products.filter((p) => p.collection_id === collection.id);
   const categories = ["All", ...Array.from(new Set(all.map((p) => p.category)))];
+  const colors = ["All", ...allColors(all)];
   const q = query.trim().toLowerCase();
   const products = all
     .filter((p) => category === "All" || p.category === category)
+    .filter((p) => color === "All" || productColors(p).includes(color))
     .filter(
       (p) =>
         !q ||
@@ -85,6 +89,7 @@ function CollectionPage() {
         p.category.toLowerCase().includes(q) ||
         (p.description ?? "").toLowerCase().includes(q),
     );
+
 
   return (
     <>
@@ -114,26 +119,55 @@ function CollectionPage() {
       </section>
 
       <section className="shell pt-12">
-        <div className="flex flex-col gap-6 border-b border-border pb-6 lg:flex-row lg:items-center lg:justify-between">
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="eyebrow mr-3">Filter</span>
-            {categories.map((c) => (
-              <button
-                key={c}
-                type="button"
-                onClick={() => setCategory(c)}
-                aria-pressed={category === c}
-                className={
-                  "border px-4 py-2 text-[0.65rem] font-bold uppercase tracking-[0.18em] transition-colors focus-flash " +
-                  (category === c
-                    ? "border-foreground bg-foreground text-background"
-                    : "border-border text-muted-foreground hover:border-foreground hover:text-foreground")
-                }
-              >
-                {c}
-              </button>
-            ))}
+        <div className="flex flex-col gap-6 border-b border-border pb-6 lg:flex-row lg:items-start lg:justify-between">
+          <div className="flex flex-col gap-4">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="eyebrow mr-3">Type</span>
+              {categories.map((c) => (
+                <button
+                  key={c}
+                  type="button"
+                  onClick={() => setCategory(c)}
+                  aria-pressed={category === c}
+                  className={
+                    "border px-4 py-2 text-[0.65rem] font-bold uppercase tracking-[0.18em] transition-colors focus-flash " +
+                    (category === c
+                      ? "border-foreground bg-foreground text-background"
+                      : "border-border text-muted-foreground hover:border-foreground hover:text-foreground")
+                  }
+                >
+                  {c}
+                </button>
+              ))}
+            </div>
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="eyebrow mr-3">Colour</span>
+              {colors.map((c) => (
+                <button
+                  key={c}
+                  type="button"
+                  onClick={() => setColor(c)}
+                  aria-pressed={color === c}
+                  className={
+                    "flex items-center gap-2 border px-4 py-2 text-[0.65rem] font-bold uppercase tracking-[0.18em] transition-colors focus-flash " +
+                    (color === c
+                      ? "border-foreground bg-foreground text-background"
+                      : "border-border text-muted-foreground hover:border-foreground hover:text-foreground")
+                  }
+                >
+                  {c !== "All" && (
+                    <span
+                      aria-hidden
+                      className="size-3 rounded-full border border-border/60"
+                      style={{ backgroundColor: COLOR_SWATCHES[c] }}
+                    />
+                  )}
+                  {c}
+                </button>
+              ))}
+            </div>
           </div>
+
 
           <div className="relative w-full lg:max-w-xs">
             <Search
@@ -181,6 +215,7 @@ function CollectionPage() {
                 onClick={() => {
                   setQuery("");
                   setCategory("All");
+                  setColor("All");
                 }}
               >
                 Clear filters

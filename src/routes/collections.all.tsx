@@ -5,6 +5,7 @@ import { Search, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ProductGrid } from "@/components/site/ProductGrid";
 import { getStorefront } from "@/lib/catalog.functions";
+import { allColors, productColors, COLOR_SWATCHES } from "@/lib/product-colors";
 
 const storefrontQuery = queryOptions({
   queryKey: ["storefront"],
@@ -36,6 +37,7 @@ function AllGlovesPage() {
   const { data } = useSuspenseQuery(storefrontQuery);
   const [range, setRange] = useState("All");
   const [category, setCategory] = useState("All");
+  const [color, setColor] = useState("All");
   const [query, setQuery] = useState("");
 
   const ranges = ["All", ...data.collections.map((c) => c.name)];
@@ -43,11 +45,13 @@ function AllGlovesPage() {
     "All",
     ...Array.from(new Set(data.products.map((p) => p.category))),
   ];
+  const colors = ["All", ...allColors(data.products)];
 
   const q = query.trim().toLowerCase();
   const products = data.products
     .filter((p) => range === "All" || p.collection?.name === range)
     .filter((p) => category === "All" || p.category === category)
+    .filter((p) => color === "All" || productColors(p).includes(color))
     .filter(
       (p) =>
         !q ||
@@ -61,6 +65,7 @@ function AllGlovesPage() {
     label: string,
     active: boolean,
     onClick: () => void,
+    swatch?: string,
   ) => (
     <button
       key={label}
@@ -68,15 +73,23 @@ function AllGlovesPage() {
       onClick={onClick}
       aria-pressed={active}
       className={
-        "border px-4 py-2 text-[0.65rem] font-bold uppercase tracking-[0.18em] transition-colors focus-flash " +
+        "flex items-center gap-2 border px-4 py-2 text-[0.65rem] font-bold uppercase tracking-[0.18em] transition-colors focus-flash " +
         (active
           ? "border-foreground bg-foreground text-background"
           : "border-border text-muted-foreground hover:border-foreground hover:text-foreground")
       }
     >
+      {swatch && (
+        <span
+          aria-hidden
+          className="size-3 rounded-full border border-border/60"
+          style={{ backgroundColor: swatch }}
+        />
+      )}
       {label}
     </button>
   );
+
 
   return (
     <>
@@ -116,7 +129,19 @@ function AllGlovesPage() {
                   filterButton(c, category === c, () => setCategory(c)),
                 )}
               </div>
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="eyebrow mr-3">Colour</span>
+                {colors.map((c) =>
+                  filterButton(
+                    c,
+                    color === c,
+                    () => setColor(c),
+                    c === "All" ? undefined : COLOR_SWATCHES[c],
+                  ),
+                )}
+              </div>
             </div>
+
 
             <div className="relative w-full lg:max-w-xs">
               <Search
@@ -164,6 +189,7 @@ function AllGlovesPage() {
                   setQuery("");
                   setCategory("All");
                   setRange("All");
+                  setColor("All");
                 }}
               >
                 Clear filters
