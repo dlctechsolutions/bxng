@@ -7,8 +7,11 @@ export type Variant = {
   product_id: string;
   color: string;
   fastening: string;
+  size: string | null;
+  sku: string | null;
   stock: number;
 };
+
 
 export type Product = {
   id: string;
