@@ -91,6 +91,11 @@ function CollectionPage() {
         (p.description ?? "").toLowerCase().includes(q),
     );
 
+  const clearAll = () => {
+    setQuery("");
+    setCategory("All");
+    setColor("All");
+  };
 
   return (
     <>
