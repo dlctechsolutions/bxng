@@ -173,6 +173,7 @@ function Home() {
         copy="The premium tier, and the final word on the founding collection. Full-grain leather, hand-stitched, built to outlast the campaign."
         slug="luxe"
         align="left"
+        imageClassName="object-[center_30%] md:object-[center_25%]"
       />
 
       <section className="shell">
