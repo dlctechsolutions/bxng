@@ -119,26 +119,55 @@ function CollectionPage() {
       </section>
 
       <section className="shell pt-12">
-        <div className="flex flex-col gap-6 border-b border-border pb-6 lg:flex-row lg:items-center lg:justify-between">
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="eyebrow mr-3">Filter</span>
-            {categories.map((c) => (
-              <button
-                key={c}
-                type="button"
-                onClick={() => setCategory(c)}
-                aria-pressed={category === c}
-                className={
-                  "border px-4 py-2 text-[0.65rem] font-bold uppercase tracking-[0.18em] transition-colors focus-flash " +
-                  (category === c
-                    ? "border-foreground bg-foreground text-background"
-                    : "border-border text-muted-foreground hover:border-foreground hover:text-foreground")
-                }
-              >
-                {c}
-              </button>
-            ))}
+        <div className="flex flex-col gap-6 border-b border-border pb-6 lg:flex-row lg:items-start lg:justify-between">
+          <div className="flex flex-col gap-4">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="eyebrow mr-3">Type</span>
+              {categories.map((c) => (
+                <button
+                  key={c}
+                  type="button"
+                  onClick={() => setCategory(c)}
+                  aria-pressed={category === c}
+                  className={
+                    "border px-4 py-2 text-[0.65rem] font-bold uppercase tracking-[0.18em] transition-colors focus-flash " +
+                    (category === c
+                      ? "border-foreground bg-foreground text-background"
+                      : "border-border text-muted-foreground hover:border-foreground hover:text-foreground")
+                  }
+                >
+                  {c}
+                </button>
+              ))}
+            </div>
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="eyebrow mr-3">Colour</span>
+              {colors.map((c) => (
+                <button
+                  key={c}
+                  type="button"
+                  onClick={() => setColor(c)}
+                  aria-pressed={color === c}
+                  className={
+                    "flex items-center gap-2 border px-4 py-2 text-[0.65rem] font-bold uppercase tracking-[0.18em] transition-colors focus-flash " +
+                    (color === c
+                      ? "border-foreground bg-foreground text-background"
+                      : "border-border text-muted-foreground hover:border-foreground hover:text-foreground")
+                  }
+                >
+                  {c !== "All" && (
+                    <span
+                      aria-hidden
+                      className="size-3 rounded-full border border-border/60"
+                      style={{ backgroundColor: COLOR_SWATCHES[c] }}
+                    />
+                  )}
+                  {c}
+                </button>
+              ))}
+            </div>
           </div>
+
 
           <div className="relative w-full lg:max-w-xs">
             <Search
