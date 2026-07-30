@@ -5,6 +5,7 @@ import { Search, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ProductGrid } from "@/components/site/ProductGrid";
 import { getStorefront } from "@/lib/catalog.functions";
+import { allColors, productColors, COLOR_SWATCHES } from "@/lib/product-colors";
 
 const storefrontQuery = queryOptions({
   queryKey: ["storefront"],
