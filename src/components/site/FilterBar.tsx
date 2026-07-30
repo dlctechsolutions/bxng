@@ -215,8 +215,27 @@ export function FilterBar({
               </div>
             </div>
           ))}
+          <div className="flex items-center justify-end gap-3 px-3 py-3 sm:px-4">
+            {hasFilters && (
+              <button
+                type="button"
+                onClick={onClear}
+                className="focus-flash text-[0.65rem] font-bold uppercase tracking-[0.18em] text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
+              >
+                Clear all
+              </button>
+            )}
+            <button
+              type="button"
+              onClick={() => setOpen(false)}
+              className="focus-flash h-11 border border-foreground bg-foreground px-6 text-[0.65rem] font-bold uppercase tracking-[0.18em] text-background transition-colors hover:bg-transparent hover:text-foreground sm:h-10"
+            >
+              Apply ({count})
+            </button>
+          </div>
         </div>
       )}
+
     </div>
   );
 }
