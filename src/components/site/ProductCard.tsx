@@ -4,8 +4,10 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { discountPercent, effectivePrice } from "@/lib/format";
 import { PriceTag, SaleBadge, StockBadge } from "./Price";
+import { Stars } from "./ProductReviews";
 import { useCart } from "@/lib/cart";
 import { useWishlist } from "@/lib/use-wishlist";
+import { useRating } from "@/lib/use-rating";
 import type { Product } from "@/lib/catalog.functions";
 
 export function ProductCard({
@@ -22,6 +24,7 @@ export function ProductCard({
   const image = product.images?.[0] ?? "/images/prod-luxe-onyx.jpg";
   const soldOut = !product.in_stock;
   const saved = wishlist.has(product.id);
+  const rating = useRating(product.id);
 
   return (
     <article className="group relative flex flex-col">
@@ -84,6 +87,18 @@ export function ProductCard({
             </Link>
           </h3>
         </div>
+        {rating && rating.count > 0 && (
+          <Link
+            to="/product/$slug"
+            params={{ slug: product.slug }}
+            className="inline-flex items-center gap-2 text-[0.7rem] text-muted-foreground transition-colors hover:text-foreground"
+          >
+            <Stars value={rating.average} />
+            <span>
+              {rating.average.toFixed(1)} ({rating.count})
+            </span>
+          </Link>
+        )}
         <PriceTag price={product.price} salePrice={product.sale_price} size="sm" />
         <div className="mt-auto">
           {soldOut ? (
