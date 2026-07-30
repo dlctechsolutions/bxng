@@ -46,18 +46,28 @@ function StoryPage() {
         </div>
         <div className="space-y-6 text-base leading-relaxed text-muted-foreground">
           <p>
-            44 Boxing started in a cold gym at 4am with one problem: the gloves that felt right
-            cost too much, and the gloves that were affordable fell apart before the season ended.
+            At 44BXNG, we believe top-quality boxing gloves shouldn’t cost a fortune. Founded by a
+            former boxer turned coach, we set out to create gear that’s built to perform, look good,
+            and stay affordable—because boxing’s for everyone.
           </p>
           <p>
-            So we built our own. We worked with a family workshop that had been cutting leather for
-            three decades, spent two years on foam density and hand shape, and refused to ship
-            anything we wouldn't spar in ourselves.
+            We know the sport inside out. It’s about discipline, not just power. But great gloves
+            were either overpriced or underwhelming—so we changed that. Our designs take inspiration
+            from timeless styles, and we focus on the details. Clean looks, quality materials, and
+            minimal branding for maximum impact.
           </p>
           <p>
-            The result is a range that does one thing well — top quality, affordable boxing gloves
-            for the people who show up when nobody is watching. No hype cycles, no seasonal
-            gimmicks. Just gloves that last.
+            We’ve been fine-tuning our gloves from day one—listening to fighters, testing materials,
+            and making improvements that matter.
+          </p>
+          <p>
+            But 44BXNG is more than gloves. We’re building a community. From sponsoring local gyms
+            to backing rising talent with free gear, we’re here to support the sport from the ground
+            up.
+          </p>
+          <p>
+            We’re learning, growing, and always looking for ways to give back. This is just the
+            beginning.
           </p>
         </div>
       </section>
