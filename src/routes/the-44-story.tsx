@@ -112,6 +112,11 @@ function StoryPage() {
               Shop Maverick
             </Link>
           </Button>
+          <Button asChild size="lg" variant="outline">
+            <Link to="/collections/$slug" params={{ slug: "nova" }}>
+              Shop Nova
+            </Link>
+          </Button>
         </div>
       </section>
     </>
