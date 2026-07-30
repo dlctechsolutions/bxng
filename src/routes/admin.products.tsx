@@ -24,7 +24,9 @@ import {
   adminSaveVariant,
   type ProductInput,
 } from "@/lib/admin.functions";
+import { ProductImageUploader } from "@/components/admin/ProductImageUploader";
 import { money, num } from "@/lib/format";
+
 
 export const Route = createFileRoute("/admin/products")({
   component: AdminProducts,
