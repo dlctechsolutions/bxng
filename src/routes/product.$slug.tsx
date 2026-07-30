@@ -194,62 +194,65 @@ function ProductPage() {
             {product.description}
           </p>
 
-          {needsVariant && (
-            <div className="space-y-6">
-              <div>
-                <p className="eyebrow">Colour {color ? `— ${color}` : ""}</p>
-                <div className="mt-3 flex flex-wrap gap-2">
-                  {colors.map((c) => (
-                    <button
-                      key={c}
-                      type="button"
-                      onClick={() => setColor(c)}
-                      className={cn(
-                        "border px-4 py-2 text-[0.65rem] font-bold uppercase tracking-[0.18em] transition-colors",
-                        color === c
-                          ? "border-foreground bg-foreground text-background"
-                          : "border-border text-muted-foreground hover:border-foreground hover:text-foreground",
-                      )}
-                    >
-                      {c}
-                    </button>
-                  ))}
+          <div className="space-y-6">
+            <dl className="flex flex-wrap gap-x-10 gap-y-2 text-xs text-muted-foreground">
+              {colourLabel && (
+                <div>
+                  <dt className="eyebrow">Colour</dt>
+                  <dd className="mt-1 text-foreground">{colourLabel}</dd>
                 </div>
-              </div>
+              )}
+              {fasteningLabel && (
+                <div>
+                  <dt className="eyebrow">Fastening</dt>
+                  <dd className="mt-1 text-foreground">{fasteningLabel}</dd>
+                </div>
+              )}
+            </dl>
+
+            {needsVariant ? (
               <div>
-                <p className="eyebrow">Fastening {fastening ? `— ${fastening}` : ""}</p>
+                <p className="eyebrow">Size {size ? `— ${size}` : ""}</p>
                 <div className="mt-3 flex flex-wrap gap-2">
-                  {fastenings.map((f) => {
-                    const unavailable = color !== null && stockFor(color, f) === 0;
+                  {sizes.map((s) => {
+                    const unavailable = stockForSize(s) === 0;
                     return (
                       <button
-                        key={f}
+                        key={s}
                         type="button"
-                        onClick={() => setFastening(f)}
+                        onClick={() => setSize(s)}
                         disabled={unavailable}
                         className={cn(
                           "border px-4 py-2 text-[0.65rem] font-bold uppercase tracking-[0.18em] transition-colors",
-                          fastening === f
+                          size === s
                             ? "border-foreground bg-foreground text-background"
                             : "border-border text-muted-foreground hover:border-foreground hover:text-foreground",
-                          unavailable && "cursor-not-allowed line-through opacity-40 hover:border-border",
+                          unavailable &&
+                            "cursor-not-allowed line-through opacity-40 hover:border-border",
                         )}
                       >
-                        {f}
+                        {s}
                       </button>
                     );
                   })}
                 </div>
               </div>
-              {selected && (
-                <p className="text-xs text-muted-foreground">
-                  {selected.stock > 0
-                    ? `${selected.stock} in stock`
-                    : "This combination is out of stock"}
-                </p>
-              )}
-            </div>
-          )}
+            ) : (
+              selected?.size && (
+                <div>
+                  <p className="eyebrow">Size</p>
+                  <p className="mt-1 text-sm">{selected.size}</p>
+                </div>
+              )
+            )}
+
+            {selected && (
+              <p className="text-xs text-muted-foreground">
+                {selected.stock > 0 ? `${selected.stock} in stock` : "Out of stock"}
+              </p>
+            )}
+          </div>
+
 
           <div className="flex flex-col gap-3 sm:flex-row">
             <Button size="lg" className="flex-1" disabled={!canAdd} onClick={addToCart}>
