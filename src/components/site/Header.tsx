@@ -17,9 +17,9 @@ import { money } from "@/lib/format";
 import { supabase } from "@/integrations/supabase/client";
 
 const collections = [
-  { slug: "nova", label: "Nova — Original", tier: "Tier I" },
-  { slug: "maverick", label: "Maverick — Mid Range", tier: "Tier II" },
-  { slug: "luxe", label: "Luxe — Premium", tier: "Tier III" },
+  { slug: "nova", label: "Nova", tier: "Tier I" },
+  { slug: "maverick", label: "Maverick", tier: "Tier II" },
+  { slug: "luxe", label: "Luxe", tier: "Tier III" },
 ];
 
 export function Header() {
