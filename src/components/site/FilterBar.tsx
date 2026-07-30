@@ -38,7 +38,7 @@ function Pill({
       onClick={onClick}
       aria-pressed={active}
       className={
-        "focus-flash h-9 border px-4 text-[0.65rem] font-bold uppercase tracking-[0.18em] transition-colors " +
+        "focus-flash h-9 shrink-0 whitespace-nowrap border px-4 text-[0.65rem] font-bold uppercase tracking-[0.18em] transition-colors " +
         (active
           ? "border-foreground bg-foreground text-background"
           : "border-border/70 bg-card text-muted-foreground hover:border-foreground/60 hover:text-foreground")
@@ -66,7 +66,7 @@ function Swatch({
       aria-label={label}
       title={label}
       className={
-        "focus-flash grid size-9 place-items-center border transition-colors " +
+        "focus-flash grid size-9 shrink-0 place-items-center border transition-colors " +
         (active
           ? "border-foreground"
           : "border-border/70 hover:border-foreground/60")
