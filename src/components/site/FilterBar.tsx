@@ -1,5 +1,7 @@
-import { Search, X } from "lucide-react";
+import { useState } from "react";
+import { Search, X, SlidersHorizontal, ChevronDown } from "lucide-react";
 import { COLOR_SWATCHES } from "@/lib/product-colors";
+
 
 export type FilterGroup = {
   id: string;
