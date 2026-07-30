@@ -157,6 +157,29 @@ function Home() {
         </div>
       </section>
 
+      {/* Selected by 44 — driven by the Featured toggle in the admin console */}
+      {selected.length > 0 && (
+        <section className="shell mt-24">
+          <div className="flex flex-wrap items-end justify-between gap-4 border-b border-border pb-6">
+            <div>
+              <p className="eyebrow">Selected by 44</p>
+              <h2 className="mt-3 text-[clamp(1.5rem,3.5vw,2.5rem)]">Hand-Picked From The Final Run</h2>
+            </div>
+            <Link
+              to="/collections/all"
+              className="inline-flex items-center text-[0.65rem] font-bold uppercase tracking-[0.2em] hover:text-accent focus-flash"
+            >
+              Shop all <ArrowRight className="ml-2 size-3.5" />
+            </Link>
+          </div>
+          <div className="mt-10">
+            <ProductGrid products={selected} columns={4} />
+          </div>
+        </section>
+      )}
+
+
+
       <RangeBanner
         image={novaBanner.url}
         eyebrow="Tier I — Nova"
