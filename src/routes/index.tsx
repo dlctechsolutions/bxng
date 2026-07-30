@@ -65,7 +65,12 @@ function Home() {
         <div className="pointer-events-none absolute inset-0 vignette" />
         <div className="shell relative flex min-h-[78vh] flex-col items-center justify-center py-24 text-center md:min-h-[86vh]">
           <div className="flex flex-col items-center gap-6">
-            <Button asChild size="lg">
+            <Button
+              asChild
+              size="lg"
+              variant="outline"
+              className="border-foreground bg-transparent text-foreground hover:bg-foreground/10 hover:text-foreground"
+            >
               <Link to="/collections/$slug" params={{ slug: "nova" }}>
                 Shop now <ArrowRight className="ml-2 size-4" />
               </Link>
