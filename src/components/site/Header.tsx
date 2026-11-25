@@ -91,10 +91,10 @@ export function Header() {
                         <Link to="/account" onClick={() => setMobileOpen(false)}>
                           My Account
                         </Link>
-                        <Link to="/orders" onClick={() => setMobileOpen(false)}>
+                        <Link to="/account/orders" onClick={() => setMobileOpen(false)}>
                           Orders
                         </Link>
-                        <Link to="/account-details" onClick={() => setMobileOpen(false)}>
+                        <Link to="/account/details" onClick={() => setMobileOpen(false)}>
                           Account Details
                         </Link>
                       </>
@@ -178,10 +178,10 @@ export function Header() {
                     <Link to="/wishlist">Wishlist</Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild>
-                    <Link to="/orders">Orders</Link>
+                    <Link to="/account/orders">Orders</Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild>
-                    <Link to="/account-details">Account Details</Link>
+                    <Link to="/account/details">Account Details</Link>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem onSelect={signOut}>Sign out</DropdownMenuItem>
