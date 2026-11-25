@@ -9,8 +9,8 @@ const links = [
   { to: "/collections/$slug", params: { slug: "maverick" }, label: "Maverick — Tier II" },
   { to: "/collections/$slug", params: { slug: "luxe" }, label: "Luxe — Tier III" },
   { to: "/wishlist", label: "Wishlist" },
-  { to: "/orders", label: "Orders" },
-  { to: "/account-details", label: "Account Details" },
+  { to: "/account/orders", label: "Orders" },
+  { to: "/account/details", label: "Account Details" },
 ] as const;
 
 const socials = [
